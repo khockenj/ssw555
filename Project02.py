@@ -1,7 +1,7 @@
 #Rob Weiss 09.12.17
-
+#TEST
 #Open File
-with open("GEDCOM Data v2.ged", 'r') as testFile:
+with open("GEDCOM Data.ged", 'r') as testFile:
     for line in testFile:
         print("--> " + line)
         currentLine = (line.rstrip()).split(" ")
@@ -15,7 +15,7 @@ with open("GEDCOM Data v2.ged", 'r') as testFile:
                 valid = "Y"
         #Level 1
         if currentLine[0] == "1":
-            if currentLine[1] == "BIRT" or currentLine[1] == "CHIL" or currentLine[1] == "DEAT" or currentLine[1] == "DIV" or currentLine[1] == "FAMC" or currentLine[1] == "FAMS" or currentLine[1] == "HUSB" or currentLine[1] == "MARR" or currentLine[1] == "NAME" or currentLine[1] == "SEX" or currentLine[1] == "WIFE":
+            if currentLine[1] in ["BIRT", "CHIL", "DEAT", "DIV", "FAMC", "FAMS", "HUSB", "MARR", "NAME", "SEX", "WIFE"]:
                 valid = "Y"
         #Level 2
         if currentLine[0] == "2":
