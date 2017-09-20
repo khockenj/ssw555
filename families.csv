@@ -1,0 +1,6 @@
+FID,Married,Divorced,Husband ID,Husband Name,Wife ID,Wife Name,Children
+@F1@,Years not provided,Years not provided,@I1@,Matthew /Smith/,@I2@,Anne /Doe/,@I3@ @I4@
+@F2@,Years not provided,Years not provided,@I7@,Charles /Smith/,@I8@,Dorothy /Williams/,@I1@ @I9@
+@F3@,Years not provided,Years not provided,@I5@,Joe /Doe/,@I6@,Elizabeth /Johnson/,@I2@
+@F4@,Years not provided,Years not provided,@I5@,Joe /Doe/,@I14@,Jessica /Dunn/,
+@F5@,Years not provided,Years not provided,@I9@,Jason /Smith/,@I10@,Linda /Davis/,@I13@
