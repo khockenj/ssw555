@@ -1,4 +1,5 @@
 from prettytable import from_csv 
+import gedcom2csv
 
 readTable = open("individuals.csv", "r") 
 table = from_csv(readTable)
