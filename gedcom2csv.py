@@ -1,11 +1,21 @@
 #Import GEDCOM into CSV
 import csv
-with open('projectGED.ged', 'r') as in_file:
-	with open('individuals', 'w', newline='') as out_file:
+from datetime import datetime, date
+import methods as meths
+
+with open('testGED.ged', 'r') as in_file:
+	with open('individuals.csv', 'w', newline='') as out_file:
 		writer = csv.writer(out_file)
-		death = 'Alive'
 		counter = 0
-		writer.writerow(('ID', 'Name', 'Gender', 'Birthday', 'Death', 'Child in', 'Spouse in'))
+		#Defaults for GEDCOMS that are missing things
+		name = "Name"
+		sex = "Sex"
+		birth = "Birth"
+		death = "Alive"
+		fams = "Fams"
+		famc = "famc"
+		age = "Age"
+		writer.writerow(('ID', 'Name', 'Gender', 'Birthday', 'Death', 'Age', 'Child in', 'Spouse in'))
 		for line in in_file:
 			lineS = line.split(" ")
 			
@@ -16,6 +26,11 @@ with open('projectGED.ged', 'r') as in_file:
 					sex = lineS[2].strip()
 				elif lineS[1].strip() == 'BIRT':
 					birth = " ".join(next(in_file).split(" ")[2:5]).strip()
+					birthD = datetime.strptime(birth, '%d %b %Y').date()
+					today = datetime.today().date()
+					age = int((meths.days_difference(birthD, today))/365)
+					if(age > 150 or age < 0):
+						age = "INVALID AGE"
 				elif lineS[1].strip() == 'DEAT':
 					death = " ".join(next(in_file).split(" ")[2:5]).strip()
 				elif lineS[1].strip() == 'FAMS':
@@ -24,11 +39,11 @@ with open('projectGED.ged', 'r') as in_file:
 					famc = lineS[2].strip()
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if counter != 0 and lineS[2].strip() != 'FAM':
-					writer.writerow((id,name,sex,birth,death,famc,fams))
+					writer.writerow((id,name,sex,birth,death,age,famc,fams))
 				counter += 1
 				if lineS[2].strip() == 'INDI':
 					id = lineS[1].strip()
-		writer.writerow((id,name,sex,birth,death,famc,fams))
+		writer.writerow((id,name,sex,birth,death,age,famc,fams))
 in_file.close()
 with open('projectGED.ged', 'r') as in_file:	
 	with open('families.csv', 'w', newline='') as out_file:
@@ -36,8 +51,6 @@ with open('projectGED.ged', 'r') as in_file:
 		writer.writerow(('FID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children'))
 		child = []
 		divorce = 'Years not provided'
-		hname = 'Joey'
-		wname = 'Joeyina'
 		married = 'Years not provided'
 		counter = 0
 		for line in in_file:
