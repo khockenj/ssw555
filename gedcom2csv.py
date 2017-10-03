@@ -1,6 +1,7 @@
 #Import GEDCOM into CSV
 import csv
 from datetime import datetime, date
+import warnings
 import methods as meths
 openedFile = "testGED.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
 
@@ -9,13 +10,14 @@ with open(openedFile, 'r') as in_file:
 		writer = csv.writer(out_file)
 		counter = 0
 		#Defaults for GEDCOMS that are missing things
-		name = "Unk"
-		sex = "Sex"
-		birth = "Birth"
+		name = "?????"
+		sex = "N/A"
+		birth = "??-??-????"
 		death = "Alive"
-		fams = "Fams"
-		famc = "famc"
-		age = "Age"
+		fams = "None"
+		famc = "???"
+		age = "??"
+		today = datetime.today().date()
 		writer.writerow(('ID', 'Name', 'Gender', 'Birthday', 'Death', 'Age', 'Child in', 'Spouse in'))
 		for line in in_file:
 			lineS = line.split(" ")
@@ -27,9 +29,8 @@ with open(openedFile, 'r') as in_file:
 					sex = lineS[2].strip()
 				elif lineS[1].strip() == 'BIRT':
 					birth = " ".join(next(in_file).split(" ")[2:]).strip()
-					birthD = datetime.strptime(birth, '%d %b %Y').date()
-					today = datetime.today().date()
-					age = int((meths.days_difference(birthD, today))/365)
+					birthDate = datetime.strptime(birth, '%d %b %Y').date()
+					age = int((meths.days_difference(birthDate, today))/365)
 					if(age > 150 or age < 0):
 						age = "INVALID AGE"
 				elif lineS[1].strip() == 'DEAT':
@@ -38,6 +39,7 @@ with open(openedFile, 'r') as in_file:
 					fams = lineS[2].strip()
 				elif lineS[1].strip() == 'FAMC':
 					famc = lineS[2].strip()
+					
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if counter != 0 and lineS[2].strip() != 'FAM':
 					writer.writerow((id,name,sex,birth,death,age,famc,fams))
@@ -92,4 +94,7 @@ with open(openedFile, 'r') as in_file:
 					child = []
 					counter += 1
 in_file.close()
+birthb4 = meths.birthBeforeMarriage()
+for err in birthb4:
+	print(err)
 print('GEDCOM converted to .csv')
