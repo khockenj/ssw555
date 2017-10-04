@@ -23,7 +23,7 @@ def days_difference(d1, d2):
 		
 def birthBeforeMarriage():
 	err = []
-	
+	#birth before death
 	with open('families.csv') as file1:
 		file1.readline()
 		for row in csv.reader(file1, delimiter=','):
@@ -33,16 +33,22 @@ def birthBeforeMarriage():
 			with open('individuals.csv') as file2:
 				file2.readline()
 				birthH = '??-??-????'
-				birthW = '??-???-????'
+				birthW = '??-??-????'
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
+						deathH = row2[5]
 					if wife in row2:
 						birthW = row2[3]
+						deathW = row2[5]
 			if birthH > married:
 				err.append(husb + "'ss birthday (" + birthH + ') is before his marriage date (' + married + ')')
 			if birthW > married:
 				err.append(wife + "'s birthday (" + birthW + ') is before her marriage date (' + married + ')')	
+			if deathH != "Alive" and deathH < birthH:
+				err.append(husb + "'s death(" + deathH + ")is before his birth ( " + birthH + ")")
+			if deathW != "Alive" and deathW < birthW:
+				err.append(wife + "'s death(" + deathW + ")is before his birth ( " + birthW + ")")
 	return err
 					
 		
