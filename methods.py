@@ -12,15 +12,15 @@ def afterCurrentDate(d1):
 	else:
 		warnings.warn('Date ' + str(d1) + ' is an invalid date')
 		return True
-		
+
 def days_difference(d1, d2):
 	#ignoring d2, as it's the current date anyway
-	if afterCurrentDate(d1): 
+	if afterCurrentDate(d1):
 		warnings.warn('The date is after the current date')
 		return -1
 	else:
 		return (d2-d1).days
-		
+
 def birthBeforeMarriage():
 	err = []
 	#birth before death
@@ -30,6 +30,7 @@ def birthBeforeMarriage():
 			married = row[1]
 			husb = row[3]
 			wife = row[5]
+			div = row[2]
 			with open('individuals.csv') as file2:
 				file2.readline()
 				birthH = '??-??-????'
@@ -37,18 +38,27 @@ def birthBeforeMarriage():
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
-						deathH = row2[5]
+						deathH = row2[4]
 					if wife in row2:
 						birthW = row2[3]
-						deathW = row2[5]
+						deathW = row2[4]
 			if birthH > married:
 				err.append(husb + "'ss birthday (" + birthH + ') is before his marriage date (' + married + ')')
 			if birthW > married:
-				err.append(wife + "'s birthday (" + birthW + ') is before her marriage date (' + married + ')')	
+				err.append(wife + "'s birthday (" + birthW + ') is before her marriage date (' + married + ')')
 			if deathH != "Alive" and deathH < birthH:
 				err.append(husb + "'s death(" + deathH + ")is before his birth ( " + birthH + ")")
 			if deathW != "Alive" and deathW < birthW:
 				err.append(wife + "'s death(" + deathW + ")is before his birth ( " + birthW + ")")
+			#User Story 05 Marriage before death and divorce before death
+			if(deathH != "Alive"):
+				if deathH > married:
+					err.append("Husband's death date(" + deathH + ") is before marriage date(" + married + ")")
+				if deathH > div:
+					err.append("Husband's death date is before divorce date")
+			if(deathW != "Alive"):
+				if deathW > married:
+					err.append("Wife's death deate is before marriage date")
+				if deathW > div:
+					err.append("Wife's death deate is before divorce date")
 	return err
-					
-		

@@ -1,4 +1,4 @@
 ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
-us21_bi00,US21:Jimmy /Conners/,F,1 JAN 2018,Alive,0,???,us21_bf01
-us21_bi01,US21:Chris /Everett/,M,2 FEB 2000,Alive,17,???,us21_bf00
-us21_bi02,US21:Martina /Navratilova/,F,2 AUG 1950,Alive,67,???,US21_bf01
+us21_bi00,US21:Jimmy /Conners/,F,1 JAN 1945,17 JUL 2010,72,???,us21_bf01
+us21_bi01,US21:Chris /Everett/,M,2 FEB 1950,17 JUL 2010,67,???,us21_bf00
+us21_bi02,US21:Martina /Navratilova/,F,2 AUG 1950,17 JUL 2010,67,???,US21_bf01
