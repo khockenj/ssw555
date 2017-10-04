@@ -23,42 +23,41 @@ def days_difference(d1, d2):
 
 def birthBeforeMarriage():
 	err = []
-	#birth before death
 	with open('families.csv') as file1:
 		file1.readline()
 		for row in csv.reader(file1, delimiter=','):
-			married = row[1]
+			married =  datetime.strptime(row[1], '%d %b %Y').date()
 			husb = row[3]
 			wife = row[5]
-			div = row[2]
+			div =  datetime.strptime(row[2], '%d %b %Y').date()
 			with open('individuals.csv') as file2:
 				file2.readline()
 				birthH = '??-??-????'
 				birthW = '??-??-????'
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
-						birthH = row2[3]
-						deathH = row2[4]
+						birthH =  datetime.strptime(row2[3], '%d %b %Y').date()
+						deathH =  datetime.strptime(row2[4], '%d %b %Y').date()
 					if wife in row2:
-						birthW = row2[3]
-						deathW = row2[4]
+						birthW =  datetime.strptime(row2[3], '%d %b %Y').date()
+						deathW =  datetime.strptime(row2[4], '%d %b %Y').date()
 			if birthH > married:
-				err.append(husb + "'ss birthday (" + birthH + ') is before his marriage date (' + married + ')')
+				err.append(husb + "'ss birthday (" + str(birthH) + ') is before his marriage date (' + str(married) + ')')
 			if birthW > married:
-				err.append(wife + "'s birthday (" + birthW + ') is before her marriage date (' + married + ')')
+				err.append(wife + "'s birthday (" + str(birthW) + ') is before her marriage date (' + str(married) + ')')
 			if deathH != "Alive" and deathH < birthH:
-				err.append(husb + "'s death(" + deathH + ")is before his birth ( " + birthH + ")")
+				err.append(husb + "'s death(" + str(deathH) + ")is before his birth ( " + str(birthH) + ")")
 			if deathW != "Alive" and deathW < birthW:
-				err.append(wife + "'s death(" + deathW + ")is before his birth ( " + birthW + ")")
+				err.append(wife + "'s death(" + str(deathW) + ")is before his birth ( " + str(birthW) + ")")
 			#User Story 05 Marriage before death and divorce before death
 			if(deathH != "Alive"):
-				if deathH > married:
-					err.append("Husband's death date(" + deathH + ") is before marriage date(" + married + ")")
-				if deathH > div:
-					err.append("Husband's death date is before divorce date")
+				if deathH < married:
+					err.append(husb + "'s death date(" + str(deathH) + ") is before marriage date(" + str(married) + ")")
+				if deathH < div:
+					err.append(husb + "'s death date(" + str(deathH) + ") is before divorce date(" + str(div) + ")")
 			if(deathW != "Alive"):
-				if deathW > married:
-					err.append("Wife's death deate is before marriage date")
-				if deathW > div:
-					err.append("Wife's death deate is before divorce date")
+				if deathW < married:
+					err.append(wife + "'s death date(" + str(deathW) + ") is before marriage date(" + str(married) + ")")
+				if deathW < div:
+					err.append(wife + "'s death date(" + str(deathW) + ") is before divorce date(" + str(div) + ")")
 	return err
