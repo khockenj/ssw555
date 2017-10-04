@@ -1,7 +1,6 @@
 from prettytable import from_csv 
-import methods as meths
 import gedcom2csv
-
+import methods as meths
 readTable = open("individuals.csv", "r") 
 table = from_csv(readTable)
 readTable.close()
@@ -12,6 +11,5 @@ readTable = open("families.csv", "r")
 table = from_csv(readTable)
 readTable.close()
 print(table)
-birthb4 = meths.birthBeforeMarriage()
-for err in birthb4:
-	print(err)
+meths.US_03()
+meths.US_08()
