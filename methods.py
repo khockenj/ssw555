@@ -201,6 +201,8 @@ def birth_before_parents_died():
 
     dad_death = dict(zip(family_id, mddate))
 
+    flag1 = 0
+    flag2 = 0
     for k,v in family_to_indv.items():
         if mom_death.get(k) != 'NA':
             for l,m in id_to_birthdates_child.items():
@@ -208,9 +210,8 @@ def birth_before_parents_died():
                     bday = m
                     mardate = mom_death.get(k)
                     if(datetime.strptime(bday, '%d-%b-%y') > datetime.strptime(mardate, '%d-%b-%y')) :
-                            print('ERROR: INDIVIDUAL: US09: ' + l +
-                              ': Child Birth ' + bday + ' before mom ' + k +
-                              ' died ' + mardate)
+                            flag1 = 1
+
 
     for k,v in family_to_indv.items():
         if dad_death.get(k) != 'NA':
@@ -219,9 +220,7 @@ def birth_before_parents_died():
                     bday2 = m
                     mardate2 = dad_death.get(k)
                     if(datetime.strptime(bday, '%d-%b-%y') > (datetime.strptime(mardate2, '%d-%b-%y') + timedelta(days=270))):
-                            print('ERROR: INDIVIDUAL: US09: ' + l +
-                              ': Child Birth ' + bday + ' 9 months before dad ' + k +
-                              ' died ' + mardate2)
+                            flag2 = 1
 
-
-
+    if flag1==1 & flag2==1:
+        print('ERROR: INDIVIDUAL: US09: Child Birth Before parents died')
