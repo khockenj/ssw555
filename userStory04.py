@@ -9,9 +9,9 @@ def US_04():
             #print(lineS[2])
 
             if lineS[1] != "Married" and lineS[2] != "Divorced":
-                bday = (datetime.strptime(lineS[1], '%d %b %Y'))
+                mday = (datetime.strptime(lineS[1], '%d %b %Y'))
                 dday = datetime.strptime(lineS[2], '%d %b %Y')
-                if bday > dday:
+                if mday > dday:
                     print('ERROR: INDIVIDUAL: US04: ' + lineS[0] + ': Divorce ' + lineS[2] + ' Marriage ' + lineS[1])
 
 
