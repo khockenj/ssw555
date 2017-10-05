@@ -37,10 +37,12 @@ def birthBeforeMarriage():
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH =  datetime.strptime(row2[3], '%d %b %Y').date()
-						deathH =  datetime.strptime(row2[4], '%d %b %Y').date()
+						if(row2[4] != "Alive"):
+							deathH =  datetime.strptime(row2[4], '%d %b %Y').date()
 					if wife in row2:
 						birthW =  datetime.strptime(row2[3], '%d %b %Y').date()
-						deathW =  datetime.strptime(row2[4], '%d %b %Y').date()
+						if(row2[4] != "Alive"):
+							deathW =  datetime.strptime(row2[4], '%d %b %Y').date()
 			if birthH > married:
 				err.append(husb + "'ss birthday (" + str(birthH) + ') is before his marriage date (' + str(married) + ')')
 			if birthW > married:
@@ -50,16 +52,15 @@ def birthBeforeMarriage():
 			if deathW != "Alive" and deathW < birthW:
 				err.append(wife + "'s death(" + str(deathW) + ")is before his birth ( " + str(birthW) + ")")
 			#User Story 05 Marriage before death and divorce before death
-			if(deathH != "Alive"):
-				if deathH < married:
-					err.append(husb + "'s death date(" + str(deathH) + ") is before marriage date(" + str(married) + ")")
-				if deathH < div:
-					err.append(husb + "'s death date(" + str(deathH) + ") is before divorce date(" + str(div) + ")")
-			if(deathW != "Alive"):
-				if deathW < married:
-					err.append(wife + "'s death date(" + str(deathW) + ") is before marriage date(" + str(married) + ")")
-				if deathW < div:
-					err.append(wife + "'s death date(" + str(deathW) + ") is before divorce date(" + str(div) + ")")
+
+			if deathH < married:
+				err.append(husb + "'s death date(" + str(deathH) + ") is before marriage date(" + str(married) + ")")
+			if deathH < div:
+				err.append(husb + "'s death date(" + str(deathH) + ") is before divorce date(" + str(div) + ")")
+			if deathW < married:
+				err.append(wife + "'s death date(" + str(deathW) + ") is before marriage date(" + str(married) + ")")
+			if deathW < div:
+				err.append(wife + "'s death date(" + str(deathW) + ") is before divorce date(" + str(div) + ")")
 	return err
 
 def US_03():
@@ -67,31 +68,31 @@ def US_03():
         for line in fp.readlines():
             lineS = line.split(",")
             #print(lineS[3])
-            
+
             if lineS[4] != "Alive" and lineS[4] != "Death":
                 bday = (datetime.strptime(lineS[3], '%d %b %Y'))
                 dday = datetime.strptime(lineS[4], '%d %b %Y')
-                if bday>dday:  
+                if bday>dday:
                       print('ERROR: INDIVIDUAL: US03: ' + lineS[0] + ': Death ' + lineS[4] + ' before birth ' + lineS[3])
-                   
+
 def US_08():
     with open("families.csv","r+") as fp:
         family_id = []
         indi_id = []
         marriage_dates = []
-       
+
         for line in fp.readlines():
             lineS = line.split(',')
             family_id.append(lineS[0])
             indi_id.append(lineS[7])
             marriage_dates.append((lineS[1]))
-        
+
     family_id = family_id[1:]
     indi_id = indi_id[1:]
     marriage_dates= marriage_dates[1:]
     family_to_indv = dict(zip(family_id, indi_id))
     familt_to_marriage = dict(zip(family_id,marriage_dates))
-   
+
 
     id_to_birthdates = {}
     with open('individuals.csv','r+') as fp1:
@@ -112,5 +113,4 @@ def US_08():
                     if(datetime.strptime(bday, '%d %b %Y') < datetime.strptime(mardate, '%d %b %Y')) :
                             print('ERROR: INDIVIDUAL: US08: ' + l +
                               ': Child Birth ' + bday + ' before parents ' + k +
-                              ' marriage ' + mardate)                
-
+                              ' marriage ' + mardate)

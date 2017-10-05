@@ -1,2 +1,13 @@
-FID,Married,Divorced,Husband ID,Husband Name,Wife ID,Wife Name,Children
-us21_bf00,1 JUN 1969,1 JUN 2015,us21_bi00,US21:Jimmy /Conners/,us21_bi01,US21:Chris /Everett/,
+FID,Married,Divorced,Husband ID,Husband Name,Wife ID,Wife Name,Children
+@F1@,Years not provided,Years not provided,@I1@,Sam /Anderson/,@I2@,Mary /Jacobs/,@I3@ @I4@
+@F2@,Years not provided,Years not provided,@I7@,Angelina /Gilbert/,@I8@,Stevens /David/,@I1@ @I9@
+@F3@,Years not provided,Years not provided,@I5@,Julie /Anderson/,@I6@,Jonathan /Sam/,@I2@
+@F4@,Years not provided,Years not provided,@I5@,Julie /Anderson/,@I14@,Oliver /Stevens/,
+@F5@,Years not provided,Years not provided,@I9@,Molly /Fischer/,@I10@,Sam /Rovins/,@I13@
+@F6@,Years not provided,Years not provided,@I9@,Molly /Fischer/,@I11@,Emily /Sam/,@I12@
+@F1@,11 AUG 1976,Years not provided,@I1@,Sam /Anderson/,@I3@,Lilly /Anderson/,@I4@ @I5@
+@F2@,6 FEB 1981,Years not provided,@I1@,Sam /Anderson/,@I2@,Mary /Jacobs/,@I6@ @I7@
+@F3@,4 MAY 1999,Years not provided,@I4@,Robert /Anderson/,@I9@,Molly /Fischer/,
+@F4@,5 MAY 1998,Years not provided,@I8@,Stevens /David/,@I5@,Julie /Anderson/,@I14@
+@F5@,4 APR 2000,Years not provided,@I6@,Jonathan /Sam/,@I12@,Agatha /Bill/,@I15@
+@F6@,4 APR 1997,9 JUL 1999,@I6@,Jonathan /Sam/,@I11@,Emily /Sam/,
