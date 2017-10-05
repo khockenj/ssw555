@@ -1,30 +1,101 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import csv
 
 
-def birth_before_death_of_parents(gedcom_file):
-    
-    r = {"passed": [], "failed": []}
+def birth_before_parents_died():
+    with open("families.csv", "r+") as fp:
+        family_id = []
+        indi_id = []
+        father_id = []
+        mother_id = []
 
-    for fam in gedcom_file.families:
-        for child in (c for c in fam.children if c.has("birth_date")):
-            chk_mom = fam.has("wife") and fam.wife.has("death_date")
-            chk_dad = fam.has("husband") and fam.husband.has("death_date")
-            mom_pass = child.birth_date < fam.wife.birth_date if chk_mom else None
-            dad_pass = ((fam.husband.birth_date.dt - child.birth_date.dt).days / 30) > 9 if chk_dad else None
-            msg = "{0} has Child {1} with birth date {2} and has".format(fam, child, child.birth_date)
 
-            if mom_pass is None:
-                msg += " mother {0} with no death date".format(fam.wife)
-            else:
-                msg += " mother {0} with death date {1}".format(fam.wife, fam.wife.death_date)
+        for line in fp.readlines():
+            lineS = line.split(',')
+            family_id.append(lineS[0])
+            indi_id.append(lineS[7])
+            father_id.append(lineS[3])
+            mother_id.append(lineS[5])
 
-            if dad_pass is None:
-                msg += " and father {0} with no death date.".format(fam.husband)
-            else:
-                msg += " and father {0} with death date {1}.".format(fam.husband, fam.husband.death_date)
+    family_id = family_id[1:]
+    indi_id = indi_id[1:]
+    father_id = indi_id[1:]
+    mother_id = indi_id[1:]
 
-            passed = ((mom_pass is None) or (mom_pass is True)) and ((dad_pass is None) or (dad_pass is True))
-            status = "passed" if passed else "failed"
-            r[status].append({"message": msg})
+    family_to_indv = dict(zip(family_id, indi_id))
+    family_to_father_id = dict(zip(family_id, father_id))
+    family_to_mother_id = dict(zip(family_id, mother_id))
 
-    return r
+
+    id_to_birthdates_child = {}
+
+    with open('individuals.csv','r+') as fp1:
+        for line in fp1.readlines():
+            lineS = line.split(',')
+            for i in family_to_indv.values():
+                if lineS[0] in i:
+                    id_to_birthdates_child[lineS[0]]= lineS[3]
+
+    id_to_deathdates_father = {}
+
+    with open('individuals.csv', 'r+') as fp1:
+        for line in fp1.readlines():
+            lineS = line.split(',')
+            for i in family_to_father_id.values():
+                if lineS[0] in i:
+                    id_to_deathdates_father[lineS[0]] = lineS[4]
+
+    id_to_deathdates_mother = {}
+
+    with open('individuals.csv', 'r+') as fp1:
+        for line in fp1.readlines():
+            lineS = line.split(',')
+            for i in family_to_mother_id.values():
+                if lineS[0] in i:
+                    id_to_deathdates_mother[lineS[0]] = lineS[4]
+
+    fddate = []
+    mddate =[]
+    mddate = []
+
+
+    for k,v in family_to_indv.items():
+        if family_to_mother_id.get(k) != 'NA':
+            for l,m in id_to_deathdates_mother.items():
+                if l in v:
+                    mddate.append(m)
+
+    mom_death = dict(zip(family_id, mddate))
+
+    for k,v in family_to_indv.items():
+        if family_to_mother_id.get(k) != 'NA':
+            for l,m in id_to_deathdates_father.items():
+                if l in v:
+                    fddate.append(m)
+
+    dad_death = dict(zip(family_id, mddate))
+
+    for k,v in family_to_indv.items():
+        if mom_death.get(k) != 'NA':
+            for l,m in id_to_birthdates_child.items():
+                if l in v:
+                    bday = m
+                    mardate = mom_death.get(k)
+                    if(datetime.strptime(bday, '%d-%b-%y') > datetime.strptime(mardate, '%d-%b-%y')) :
+                            print('ERROR: INDIVIDUAL: US09: ' + l +
+                              ': Child Birth ' + bday + ' before mom ' + k +
+                              ' died ' + mardate)
+
+    for k,v in family_to_indv.items():
+        if dad_death.get(k) != 'NA':
+            for l,m in id_to_birthdates_child.items():
+                if l in v:
+                    bday2 = m
+                    mardate2 = dad_death.get(k)
+                    if(datetime.strptime(bday, '%d-%b-%y') > (datetime.strptime(mardate2, '%d-%b-%y') + timedelta(days=270))):
+                            print('ERROR: INDIVIDUAL: US09: ' + l +
+                              ': Child Birth ' + bday + ' 9 months before dad ' + k +
+                              ' died ' + mardate2)
+
+
+
