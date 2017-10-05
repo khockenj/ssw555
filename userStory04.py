@@ -1,13 +1,18 @@
-import datetime
+from datetime import datetime
+import csv
 
-def MarriageBeforeDivorce(famListData):
-    for i in famListData:
-        if(i[4] != 0):
-            if(i[3] > i[4]):
-                dateList.append(i[0])
-                print(i[0] + " have marriage date after the divorce date")
-    if(len(dateList) == 0):
-        print("There is no one having marriage dates after divorce date :)")
-    else:
-        print("These people have marriage dates after their divorce dates :( ")
-        print(dateList)
+
+def US_04():
+    with open("families.csv", "r+") as fp:
+        for line in fp.readlines():
+            lineS = line.split(",")
+            #print(lineS[2])
+
+            if lineS[1] != "Married" and lineS[2] != "Divorced":
+                bday = (datetime.strptime(lineS[1], '%d %b %Y'))
+                dday = datetime.strptime(lineS[2], '%d %b %Y')
+                if bday > dday:
+                    print('ERROR: INDIVIDUAL: US04: ' + lineS[0] + ': Divorce ' + lineS[2] + ' Marriage ' + lineS[1])
+
+
+(US_04())
