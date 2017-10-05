@@ -14,6 +14,7 @@ readTable.close()
 print(table)
 meths.US_03()
 meths.US_08()
+meths.marriage_before_divorce()
 birthb4 = meths.birthBeforeMarriage()
 for err in birthb4:
 	print(err)
