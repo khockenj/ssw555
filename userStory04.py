@@ -2,7 +2,7 @@ from datetime import datetime
 import csv
 
 
-def US_04():
+def marriage_before_divorce():
     with open("families.csv", "r+") as fp:
         for line in fp.readlines():
             lineS = line.split(",")
