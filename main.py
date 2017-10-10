@@ -14,12 +14,9 @@ readTable.close()
 print(table)
 
 #Sprint1
-meths.afterCurrentDate()
-meths.days_difference()
+
 meths.US_03()
 meths.US_08()
 meths.marriage_before_divorce()
 meths.birth_before_parents_died()
-birthb4 = meths.birthBeforeMarriage()
-for err in birthb4:
-	print(err)
+
