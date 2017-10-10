@@ -122,11 +122,11 @@ def marriage_before_divorce():
             lineS = line.split(",")
             #print(lineS[2])
 
-            if lineS[1] != "Married" and lineS[2] != "Divorced":
+            if lineS[1] != "Married" and lineS[2] != "Years not provided":
                 mday = (datetime.strptime(lineS[1], '%d %b %Y'))
                 dday = datetime.strptime(lineS[2], '%d %b %Y')
-                if mday > dday:
-                    print('ERROR: INDIVIDUAL: US04: ' + lineS[0] + ': Divorce ' + lineS[2] + ' Marriage ' + lineS[1])
+                if mday < dday:
+                    print('ERROR: INDIVIDUAL: US04: ' + lineS[0] + ': Divorce ' + lineS[2] + 'before Marriage ' + lineS[1])
 
 def birth_before_parents_died():
     with open("families.csv", "r+") as fp:
@@ -208,9 +208,12 @@ def birth_before_parents_died():
             for l,m in id_to_birthdates_child.items():
                 if l in v:
                     bday = m
-                    mardate = mom_death.get(k)
-                    if(datetime.strptime(bday, '%d-%b-%y') > datetime.strptime(mardate, '%d-%b-%y')) :
+                    mdate = mom_death.get(k)
+                    if(datetime.strptime(bday, '%d %b %Y') > datetime.strptime(mdate, '%d %b %Y')) :
                             flag1 = 1
+                            print('ERROR: INDIVIDUAL: US09: ' + l +
+                                  ': Child Birth ' + bday + ' before parents ' + k +
+                                  ' died ' + mdate)
 
 
     for k,v in family_to_indv.items():
@@ -218,9 +221,11 @@ def birth_before_parents_died():
             for l,m in id_to_birthdates_child.items():
                 if l in v:
                     bday2 = m
-                    mardate2 = dad_death.get(k)
-                    if(datetime.strptime(bday, '%d-%b-%y') > (datetime.strptime(mardate2, '%d-%b-%y') + timedelta(days=270))):
+                    ddate = dad_death.get(k)
+                    if(datetime.strptime(bday, '%d %b %Y') > (datetime.strptime(ddate, '%d %b %Y') + timedelta(days=270))):
                             flag2 = 1
 
-    if flag1==1 & flag2==1:
-        print('ERROR: INDIVIDUAL: US09: Child Birth Before parents died')
+
+   
+
+
