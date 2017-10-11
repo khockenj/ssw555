@@ -12,10 +12,9 @@ readTable = open("families.csv", "r")
 table = from_csv(readTable)
 readTable.close()
 print(table)
-meths.US_03()
-meths.US_08()
-meths.marriage_before_divorce()
-meths.birth_before_parents_died()
-birthb4 = meths.birthBeforeMarriage()
-for err in birthb4:
+errors = meths.INDI_ONLY()
+for err in errors:
+	print(err)
+errors2 = meths.INDI_FAM_relations()
+for err in errors2:
 	print(err)

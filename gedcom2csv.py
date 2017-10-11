@@ -3,7 +3,7 @@ import csv
 from datetime import datetime, date
 import warnings
 import methods as meths
-openedFile = "testGED.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
+openedFile = "testGEDforMostStories.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
 err = []
 with open(openedFile, 'r') as in_file:
 	with open('individuals.csv', 'w', newline='') as out_file:
@@ -30,7 +30,7 @@ with open(openedFile, 'r') as in_file:
 				elif lineS[1].strip() == 'BIRT':
 					birth = " ".join(next(in_file).split(" ")[2:]).strip()
 					birthDate = datetime.strptime(birth, '%d %b %Y').date()
-					age = int((meths.days_difference(birthDate, today))/365)
+					age = int((meths.days_difference(birthDate, today,'years')))
 				elif lineS[1].strip() == 'DEAT':
 					death = " ".join(next(in_file).split(" ")[2:]).strip()
 				elif lineS[1].strip() == 'FAMS':
@@ -41,6 +41,13 @@ with open(openedFile, 'r') as in_file:
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if counter != 0 and lineS[2].strip() != 'FAM':
 					writer.writerow((id,name,sex,birth,death,age,famc,fams))
+					name = "?????"
+					sex = "N/A"
+					birth = "??-??-????"
+					death = "Alive"
+					fams = "None"
+					famc = "???"
+					age = "??"
 				counter += 1
 				if lineS[2].strip() == 'INDI':
 					id = lineS[1].strip()
@@ -90,6 +97,12 @@ with open(openedFile, 'r') as in_file:
 				if lineS[2].strip() != 'INDI':
 					fid = lineS[1].strip()
 					child = []
+					divorce = 'Years not provided'
+					married = 'Years not provided'
+					hid = "0"
+					hname = "Unknown"
+					wid = "0"
+					wname = "Unknown"
 					counter += 1
 in_file.close()
 print('GEDCOM converted to .csv')
