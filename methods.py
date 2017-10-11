@@ -130,7 +130,7 @@ def US_08():
     mardate = []
     bday = []
     for k,v in family_to_indv.items():
-        if familt_to_marriage.get(k) != 'NA':
+        if familt_to_marriage.get(k) != 'Years not provided':
             for l,m in id_to_birthdates.items():
                 if l in v:
                     bday = m
