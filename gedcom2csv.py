@@ -1,21 +1,23 @@
 #Import GEDCOM into CSV
 import csv
 from datetime import datetime, date
-import methods as meths
-openedFile = "GEDCOM data.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
-
+import warnings
+import pushedmethods as meths
+openedFile = "testGED.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
+err = []
 with open(openedFile, 'r') as in_file:
-	with open('individuals.csv', 'w') as out_file:
+	with open('individuals.csv', 'w', newline='') as out_file:
 		writer = csv.writer(out_file)
 		counter = 0
 		#Defaults for GEDCOMS that are missing things
-		name = "Unk"
-		sex = "Sex"
-		birth = "Birth"
+		name = "?????"
+		sex = "N/A"
+		birth = "??-??-????"
 		death = "Alive"
-		fams = "Fams"
-		famc = "famc"
-		age = "Age"
+		fams = "None"
+		famc = "???"
+		age = "??"
+		today = datetime.today().date()
 		writer.writerow(('ID', 'Name', 'Gender', 'Birthday', 'Death', 'Age', 'Child in', 'Spouse in'))
 		for line in in_file:
 			lineS = line.split(" ")
@@ -27,17 +29,15 @@ with open(openedFile, 'r') as in_file:
 					sex = lineS[2].strip()
 				elif lineS[1].strip() == 'BIRT':
 					birth = " ".join(next(in_file).split(" ")[2:]).strip()
-					birthD = datetime.strptime(birth, '%d %b %Y').date()
-					today = datetime.today().date()
-					age = int((meths.days_difference(birthD, today))/365)
-					if(age > 150 or age < 0):
-						age = "INVALID AGE"
+					birthDate = datetime.strptime(birth, '%d %b %Y').date()
+					age = int((meths.days_difference(birthDate, today))/365)
 				elif lineS[1].strip() == 'DEAT':
 					death = " ".join(next(in_file).split(" ")[2:]).strip()
 				elif lineS[1].strip() == 'FAMS':
 					fams = lineS[2].strip()
 				elif lineS[1].strip() == 'FAMC':
 					famc = lineS[2].strip()
+					
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if counter != 0 and lineS[2].strip() != 'FAM':
 					writer.writerow((id,name,sex,birth,death,age,famc,fams))
@@ -47,7 +47,7 @@ with open(openedFile, 'r') as in_file:
 		writer.writerow((id,name,sex,birth,death,age,famc,fams))
 in_file.close()
 with open(openedFile, 'r') as in_file:	
-	with open('families.csv', 'w') as out_file:
+	with open('families.csv', 'w', newline='') as out_file:
 		writer = csv.writer(out_file)
 		writer.writerow(('FID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children'))
 		child = []
