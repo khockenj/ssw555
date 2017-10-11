@@ -1,5 +1,5 @@
 from prettytable import from_csv 
-import pushedmethods as meths
+import methods as meths
 import gedcom2csv
 
 readTable = open("individuals.csv", "r") 
