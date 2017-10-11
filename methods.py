@@ -85,7 +85,7 @@ def birthBeforeMarriage():
 
 				
 			else:
-				err.append("Marriage date for " + husb  + "and " + wife + " not available")
+				err.append("ERROR: GENERAL: Marriage date for " + husb  + "and " + wife + " not available")
 	return err
 
 def US_03():

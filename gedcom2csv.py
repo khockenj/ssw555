@@ -2,7 +2,7 @@
 import csv
 from datetime import datetime, date
 import warnings
-import pushedmethods as meths
+import methods as meths
 openedFile = "testGED.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
 err = []
 with open(openedFile, 'r') as in_file:
