@@ -146,3 +146,62 @@ def US15(anArray, husb, wife):
 	if(len(anArray) > 14):
 		print("ERROR: US15: {} and {} have more than 15 children".format(husb, wife))
 		return True
+	
+#User Story 10
+def US10():
+    f = open("families.csv", "r")
+    fString = f.read()
+
+    flist = []
+    for line in fString.split("\n"):
+        flist.append(line.split(","))
+
+    i = open("individuals.csv", "r")
+    iString = i.read()
+
+    ilist = []
+    for line in iString.split("\n"):
+        ilist.append(line.split(","))
+
+    rlist =[]
+    for i in range(len(flist)-1):
+        for j in range(len(ilist)-1):
+            if flist[i][3] == ilist[j][0]:
+                rlist.append("{},{},{}".format(ilist[j][0], ilist[j][3], flist[i][1]))
+
+            if flist[i][5] == ilist[j][0]:
+                rlist.append("{},{},{}".format(ilist[j][0], ilist[j][3], flist[i][1]))
+    tlist = []
+    for i in rlist:
+        for line in i.split("\n"):
+            tlist.append(line.split(","))
+
+    for k in tlist:
+        if (k[2] != 'Years not provided') & (k[1] != 'Years not provided') :
+            mday = (datetime.datetime.strptime(k[2], '%d %b %Y')).date()
+            bday = datetime.datetime.strptime(k[1], '%d %b %Y').date()
+            nbday = bday + timedelta(days=14 * 365)
+
+            if mday < nbday:
+                print('ERROR: INDIVIDUAL: US10: ' + k[0] + ' Marriage on ' + k[2] + ' which is before 14 years of Birth which is ' + k[1])
+
+#User Story 14
+def US14():
+    i = open("individuals.csv", "r")
+    iString = i.read()
+
+    ilist = []
+    for line in iString.split("\n"):
+        ilist.append(line.split(","))
+    count = 1
+    people = []
+    del ilist[0]
+    for i in range(len(ilist) - 2):
+        if (ilist[i][3] == ilist[i + 1][3]) & (ilist[i][6] == ilist[i + 1][6]):
+            count += 1
+            people.append('{}'.format(ilist[i][0]))
+
+    if count > 5:
+        print('ERROR: INDIVIDUAL: US14: Multiple Siblings are')
+        for i in range(len(people)):
+            print(people[i])
