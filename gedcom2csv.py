@@ -3,7 +3,7 @@ import csv
 from datetime import datetime, date
 import warnings
 import methods as meths
-openedFile = "testGEDforMostStories.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
+openedFile = "US15.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
 err = []
 with open(openedFile, 'r') as in_file:
 	with open('individuals.csv', 'w', newline='') as out_file:
@@ -93,16 +93,21 @@ with open(openedFile, 'r') as in_file:
 							elif wife in line2.split(" "):
 								wname = " ".join(next(in_file2).split(" ")[2:]).strip()
 					in_file2.close()
-					writer.writerow((fid,married,divorce,husb,hname,wife,wname," ".join(child)))
+					child = " ".join(child)
+					writer.writerow((fid,married,divorce,husb,hname,wife,wname,child))
 				if lineS[2].strip() != 'INDI':
 					fid = lineS[1].strip()
 					child = []
 					divorce = 'Years not provided'
 					married = 'Years not provided'
+					
 					hid = "0"
 					hname = "Unknown"
 					wid = "0"
 					wname = "Unknown"
 					counter += 1
+			elif lineS[0].strip() == '0' and lineS[1].strip() == 'TRLR':
+				child = " ".join(child)
+				writer.writerow((fid,married,divorce,husb,hname,wife,wname,child))
 in_file.close()
 print('GEDCOM converted to .csv')
