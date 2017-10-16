@@ -205,3 +205,31 @@ def US14():
         print('ERROR: INDIVIDUAL: US14: Multiple Siblings are')
         for i in range(len(people)):
             print(people[i])
+	
+#User Story 28
+def US28():
+    with open('families.csv','r+') as fp1:
+        ret = True
+        i = 1 
+        for line in fp1.readlines():
+            if i == 1:
+                i += 1
+                continue
+            lineS = line.split(',')
+            children = lineS[7].split()
+            if len(children)==0 or len(children)==1:
+                ret = False
+                print("ERROR: FAMILY: US28: Family ",lineS[0],"has zero or one child")
+            i+=1
+    return ret
+
+#User Story 29
+def US29():
+     with open('individuals.csv','r+') as fp1:
+        ret = True
+        for line in fp1.readlines():
+            lineS = line.split(',')
+            if lineS[4] == 'Alive':
+                print("ERROR: INDIVIDUAL: US30: Individual",lineS[0]," is not deceased")
+                ret = False
+     return ret
