@@ -44,7 +44,7 @@ def INDI_FAM_relations():
 				file2.readline()
 				birthH = None
 				birthW = None
-				
+
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
@@ -77,7 +77,8 @@ def INDI_FAM_relations():
 									if deathW != 'Alive':
 										if int(days_difference(deathW, datetime.datetime.strptime(row2[3],'%d %b %Y').date(), 'days')) > 0:
 											err.append('ERROR: US09: ' + x + "'s birthday(" + str(datetime.datetime.strptime(row2[3], '%d %b %Y').date()) + ") is after their mothers's death(" + str(deathW) + ")")
-					
+				US15(children, husb, wife)
+
 					#US02/03 Birth after marriage, death before marriage
 				if birthW != None and birthH != None:
 					if married > datetime.datetime(1, 1, 1).date() and isinstance(married, datetime.date):	#to account for date=today for bad marriage dates
@@ -139,3 +140,9 @@ def INDI_ONLY():
 				if age > 150 or age < 0:
 					err.append('ERROR: US07: ' + row[0] + "'s age(" + str(age) + ") is older than 150 or less than 0.")
 	return err
+
+#US15 More than 15 children
+def US15(anArray, husb, wife):
+	if(len(anArray) > 14):
+		print("ERROR: US15: {} and {} have more than 15 children".format(husb, wife))
+		return True
