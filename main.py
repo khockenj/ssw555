@@ -18,3 +18,6 @@ for err in errors:
 errors2 = meths.INDI_FAM_relations()
 for err in errors2:
 	print(err)
+	
+meths.US10()
+meths.US14()
