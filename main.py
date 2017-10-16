@@ -21,3 +21,5 @@ for err in errors2:
 	
 meths.US10()
 meths.US14()
+meths.US28()
+meths.US29()
