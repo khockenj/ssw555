@@ -1,8 +1,6 @@
 ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I1@,Matthew /Smith/,M,17 JAN 1960,Alive,57,@F3@,@F2@
-@I2@,Rob /Smith/,M,25 APR 1979,Alive,38,@F2@,@F1@
 @I3@,Anne /Doe/,F,4 APR 1985,Alive,32,@F4@,@F2@
-@I4@,John /Smith/,M,27 JAN 1995,Alive,22,@F2@,@F5@
 @I5@,Jason /Smith/,M,6 MAR 1966,2 SEP 1990,51,@F3@,@F7@
 @I6@,Joe /Doe/,M,12 APR 1927,Alive,90,???,@F9@
 @I7@,Dorothy /Williams/,F,11 JAN 1928,17 JUL 2010,89,???,@F8@
@@ -31,3 +29,14 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I30@,Johnson /Johnson/,M,23 JUL 2120,Alive,-1,???,None
 @I31@,Johnson /Johnson/,M,23 JUL 1815,Alive,202,???,None
 @I32@,Help /Me/,F,20 MAY 1800,10 APR 2020,217,???,None
+@US14/15-1@,Samuel /Taat/,M,1 JAN 2000,Alive,17,???,@US14/15F1@
+@US14/15-2@,Kimuel /Bister/,F,1 JAN 2000,Alive,17,???,@US14/15F1@
+@US14/15-3@,Kim Taat /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,@US14/15F2@
+@US14/15-4@,Maria /Teet/,F,1 JAN 2010,Alive,7,???,@US14/15F2@
+@US14/15-5@,Bim /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-6@,Lim /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-7@,Tin /Taat/,F,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-8@,Yin /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-9@,Sim /Taat/,F,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-10@,Fim /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,None
+@US14/15-11@,Taati /Taat/,F,1 JAN 2015,Alive,2,@US14/15F1@,None

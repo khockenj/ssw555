@@ -3,7 +3,7 @@ import csv
 from datetime import datetime, date
 import warnings
 import methods as meths
-openedFile = "US15.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
+openedFile = "Master.ged" #This will change the open file for ALL (families/indi) - it's cleaner this way and we won't forget to change all of them now
 err = []
 with open(openedFile, 'r') as in_file:
 	with open('individuals.csv', 'w', newline='') as out_file:
@@ -21,7 +21,7 @@ with open(openedFile, 'r') as in_file:
 		writer.writerow(('ID', 'Name', 'Gender', 'Birthday', 'Death', 'Age', 'Child in', 'Spouse in'))
 		for line in in_file:
 			lineS = line.split(" ")
-			
+
 			if lineS[0].strip() == '1' and lineS[1].strip() not in ['SOUR', 'FILE', 'DEST', 'GEDC', 'SUBM', 'SUBN', 'CHAR']:
 				if lineS[1].strip() == 'NAME':
 					name = " ".join(lineS[2:]).strip()
@@ -37,7 +37,7 @@ with open(openedFile, 'r') as in_file:
 					fams = lineS[2].strip()
 				elif lineS[1].strip() == 'FAMC':
 					famc = lineS[2].strip()
-					
+
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if counter != 0 and lineS[2].strip() != 'FAM':
 					writer.writerow((id,name,sex,birth,death,age,famc,fams))
@@ -53,7 +53,7 @@ with open(openedFile, 'r') as in_file:
 					id = lineS[1].strip()
 		writer.writerow((id,name,sex,birth,death,age,famc,fams))
 in_file.close()
-with open(openedFile, 'r') as in_file:	
+with open(openedFile, 'r') as in_file:
 	with open('families.csv', 'w', newline='') as out_file:
 		writer = csv.writer(out_file)
 		writer.writerow(('FID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children'))
@@ -83,7 +83,7 @@ with open(openedFile, 'r') as in_file:
 						married = " ".join(next(in_file).split(" ")[2:]).strip()
 					elif lineS[1].strip() == 'DIV':
 						divorce = " ".join(next(in_file).split(" ")[2:]).strip()
-						
+
 			elif lineS[0].strip() == '0' and lineS[1].strip() not in ['NOTE', 'HEAD', 'TRLR']:
 				if lineS[2].strip() == 'FAM' and counter != 0:
 					with open(openedFile, 'r') as in_file2:
@@ -100,7 +100,7 @@ with open(openedFile, 'r') as in_file:
 					child = []
 					divorce = 'Years not provided'
 					married = 'Years not provided'
-					
+
 					hid = "0"
 					hname = "Unknown"
 					wid = "0"
