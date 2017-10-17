@@ -22,6 +22,16 @@
 1 FAMS @F1@
 1 FAMS @F2@
 1 FAMC @F3@
+0 @I2@ INDI
+1 NAME Rob /Smith/
+2 GIVN Rob
+2 SURN Smith
+2 _MARNM Smith
+1 SEX M
+1 BIRT
+2 DATE 25 APR 1979
+1 FAMS @F1@
+1 FAMC @F2@
 0 @I3@ INDI
 1 NAME Anne /Doe/
 2 GIVN Anne
@@ -32,6 +42,16 @@
 2 DATE 4 APR 1985
 1 FAMS @F2@
 1 FAMC @F4@
+0 @I4@ INDI
+1 NAME John /Smith/
+2 GIVN John
+2 SURN Smith
+2 _MARNM Smith
+1 SEX M
+1 BIRT
+2 DATE 27 MAY 1979
+1 FAMS @F5@
+1 FAMC @F2@
 0 @I5@ INDI
 1 NAME Jason /Smith/
 2 GIVN Jason
