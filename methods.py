@@ -21,7 +21,11 @@ def days_difference(d1, d2, type):
 	else:
 		typeDict = {'years': 365, 'weeks': 7, 'months': 30.4, 'days': 1}
 		return str(((d2-d1)/typeDict[type]).days)
-
+		
+def test_US27():
+	birthday = datetime.datetime(1900,5,10).date()
+	assert int(days_difference(birthday,today,'years')) == 117
+#def test_US13():
 
 def INDI_FAM_relations():
 	err = []
@@ -40,11 +44,13 @@ def INDI_FAM_relations():
 			husb = row[3]
 			wife = row[5]
 			children = row[7].split(" ")
+			childbirth = {}
+			count = 0
 			with open('individuals.csv') as file2:
 				file2.readline()
 				birthH = None
 				birthW = None
-
+				
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
@@ -60,6 +66,24 @@ def INDI_FAM_relations():
 							deathW = datetime.datetime.strptime(deathW, '%d %b %Y').date()
 						if birthW != '??-??-????' or birthW != None:
 							birthW = datetime.datetime.strptime(birthW, '%d %b %Y').date()
+					#US13 less than 8 months apart or more than 2 days
+					if len(children) > 1:
+						for i in children:
+							if i in row2:
+								childbirth[i] = datetime.datetime.strptime(row2[3], '%d %b %Y').date()	
+						
+						temp = childbirth.copy()
+						for key, value in childbirth.items():
+							temp.pop(key)
+							for key2, value2 in temp.items():
+								if value > value2:
+									a = value
+									value = value2
+									value2 = a
+								if int(days_difference(value, value2, 'months')) <= 8 and int(days_difference(value, value2, 'days')) > 2 and count < len(children)-1:
+									count += 1
+									us13e = True
+									print("ERROR: US13: " + key + "'s (" + str(value) + ") and " + key2 + "'s birthday(" + str(value2) + ") are either less than 8 months apart or more than 2 days apart")
 					#US08/09
 					if birthW != None and birthH != None:
 						if len(children) > 0:
@@ -78,7 +102,6 @@ def INDI_FAM_relations():
 										if int(days_difference(deathW, datetime.datetime.strptime(row2[3],'%d %b %Y').date(), 'days')) > 0:
 											err.append('ERROR: US09: ' + x + "'s birthday(" + str(datetime.datetime.strptime(row2[3], '%d %b %Y').date()) + ") is after their mothers's death(" + str(deathW) + ")")
 				US15(children, husb, wife)
-
 					#US02/03 Birth after marriage, death before marriage
 				if birthW != None and birthH != None:
 					if married > datetime.datetime(1, 1, 1).date() and isinstance(married, datetime.date):	#to account for date=today for bad marriage dates
@@ -119,35 +142,39 @@ def INDI_FAM_relations():
 	return err
 
 def INDI_ONLY():
-	err = []
 	today = datetime.datetime.today().date()
 	with open("individuals.csv", "r") as file:
 		file.readline()
 		for row in csv.reader(file, delimiter=','):
-			#US03
 			bday = datetime.datetime.strptime(row[3], '%d %b %Y').date()
 			dday = row[4]
 			age = int(row[5])
 			if dday != 'Alive':
 				dday = datetime.datetime.strptime(dday, '%d %b %Y').date()
-				if bday > dday:
-					err.append('ERROR: US03: ' + row[0] + "'s death(" + str(dday) + ') is their before birth(' + str(bday) +')')
-				#US01
-				if today < dday:
-					err.append('ERROR: US01: ' + row[0] + "'s death(" + str(dday) + ") is after today(" + str(today) + ")")
-				if today < bday:
-					err.append('ERROR: US01: ' + row[0] + "'s birth(" + str(bday) + ") is after today(" + str(today) + ")")
-				if age > 150 or age < 0:
-					err.append('ERROR: US07: ' + row[0] + "'s age(" + str(age) + ") is older than 150 or less than 0.")
-	return err
-
-#US15 More than 15 children
-def US15(anArray, husb, wife):
-	if(len(anArray) > 14):
-		print("ERROR: US15: {} and {} have more than 15 children".format(husb, wife))
-		return True
+			
+				US01(today, dday, bday, row[0])
+				US03(dday, bday, age, row[0])
+			US07(age, row[0])
+	return 0
 	
-#User Story 10
+def US01(today, dday, bday, row):
+	if today < dday:
+		print('ERROR: US01: ' + row + "'s death(" + str(dday) + ") is after today(" + str(today) + ")")
+		return False
+	if today < bday:
+		print('ERROR: US01: ' + row + "'s birth(" + str(bday) + ") is after today(" + str(today) + ")")
+		return False
+	return True
+	
+def US03(dday, bday, age, row):
+		if bday > dday:
+			print('ERROR: US03: ' + row + "'s death(" + str(dday) + ') is their before birth(' + str(bday) +')')
+def US07(age, row):
+	if age > 150 or age < 0:
+		print('ERROR: US07: ' + row + "'s age(" + str(age) + ") is older than 150 or less than 0.")
+		return False
+	return True
+	
 def US10():
     f = open("families.csv", "r")
     fString = f.read()
@@ -184,8 +211,6 @@ def US10():
 
             if mday < nbday:
                 print('ERROR: INDIVIDUAL: US10: ' + k[0] + ' Marriage on ' + k[2] + ' which is before 14 years of Birth which is ' + k[1])
-
-#User Story 14
 def US14():
     i = open("individuals.csv", "r")
     iString = i.read()
@@ -205,8 +230,11 @@ def US14():
         print('ERROR: INDIVIDUAL: US14: Multiple Siblings are')
         for i in range(len(people)):
             print(people[i])
-	
-#User Story 28
+def US15(anArray, husb, wife):
+	if(len(anArray) > 14):
+		print("ERROR: US15: {} and {} have more than 15 children".format(husb, wife))
+		return False
+	return True
 def US28():
     with open('families.csv','r+') as fp1:
         ret = True
@@ -222,8 +250,6 @@ def US28():
                 print("ERROR: FAMILY: US28: Family ",lineS[0],"has zero or one child")
             i+=1
     return ret
-
-#User Story 29
 def US29():
      with open('individuals.csv','r+') as fp1:
         ret = True
