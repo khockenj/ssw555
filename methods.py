@@ -21,7 +21,7 @@ def days_difference(d1, d2, type):
 	else:
 		typeDict = {'years': 365, 'weeks': 7, 'months': 30.4, 'days': 1}
 		return str(((d2-d1)/typeDict[type]).days)
-		
+
 def test_US27():
 	birthday = datetime.datetime(1900,5,10).date()
 	assert int(days_difference(birthday,today,'years')) == 117
@@ -50,7 +50,7 @@ def INDI_FAM_relations():
 				file2.readline()
 				birthH = None
 				birthW = None
-				
+
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
@@ -70,8 +70,8 @@ def INDI_FAM_relations():
 					if len(children) > 1:
 						for i in children:
 							if i in row2:
-								childbirth[i] = datetime.datetime.strptime(row2[3], '%d %b %Y').date()	
-						
+								childbirth[i] = datetime.datetime.strptime(row2[3], '%d %b %Y').date()
+
 						temp = childbirth.copy()
 						for key, value in childbirth.items():
 							temp.pop(key)
@@ -151,12 +151,12 @@ def INDI_ONLY():
 			age = int(row[5])
 			if dday != 'Alive':
 				dday = datetime.datetime.strptime(dday, '%d %b %Y').date()
-			
+
 				US01(today, dday, bday, row[0])
 				US03(dday, bday, age, row[0])
 			US07(age, row[0])
 	return 0
-	
+
 def US01(today, dday, bday, row):
 	if today < dday:
 		print('ERROR: US01: ' + row + "'s death(" + str(dday) + ") is after today(" + str(today) + ")")
@@ -165,7 +165,7 @@ def US01(today, dday, bday, row):
 		print('ERROR: US01: ' + row + "'s birth(" + str(bday) + ") is after today(" + str(today) + ")")
 		return False
 	return True
-	
+
 def US03(dday, bday, age, row):
 		if bday > dday:
 			print('ERROR: US03: ' + row + "'s death(" + str(dday) + ') is their before birth(' + str(bday) +')')
@@ -174,7 +174,7 @@ def US07(age, row):
 		print('ERROR: US07: ' + row + "'s age(" + str(age) + ") is older than 150 or less than 0.")
 		return False
 	return True
-	
+
 def US10():
     f = open("families.csv", "r")
     fString = f.read()
@@ -230,15 +230,17 @@ def US14():
         print('ERROR: INDIVIDUAL: US14: Multiple Siblings are')
         for i in range(len(people)):
             print(people[i])
+#US15 (Fewer than 15 siblings): There should be fewer than 15 siblings in a family
 def US15(anArray, husb, wife):
 	if(len(anArray) > 14):
 		print("ERROR: US15: {} and {} have more than 15 children".format(husb, wife))
 		return False
 	return True
+
 def US28():
     with open('families.csv','r+') as fp1:
         ret = True
-        i = 1 
+        i = 1
         for line in fp1.readlines():
             if i == 1:
                 i += 1
