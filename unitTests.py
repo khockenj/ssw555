@@ -24,3 +24,13 @@ class TestCases(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+def test_US27():
+	today = datetime.datetime.today().date()
+	birthday = datetime.datetime(1900,5,10).date()
+	assert int(days_difference(birthday,today,'years')) == 117
+def test_US13():
+	children=['@I2', '@I4']
+	childbirth = {'@I2': datetime.date(1979, 4, 25), '@I4': datetime.date(1979, 5, 27)}
+	temp = childbirth.copy()
+	count = 0
+	assert US13(childbirth, temp, children, count) == 1
