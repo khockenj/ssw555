@@ -287,6 +287,6 @@ def US29():
         for line in fp1.readlines():
             lineS = line.split(',')
             if lineS[4] == 'Alive':
-                print("ERROR: INDIVIDUAL: US30: Individual",lineS[0]," is not deceased")
+                print("ERROR: INDIVIDUAL: US29: Individual",lineS[0]," is not deceased")
                 ret = False
      return ret
