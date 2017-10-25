@@ -9,7 +9,7 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I8@,Elizabeth /Johnson/,F,19 NOV 1930,13 OCT 2013,86,???,@F11@
 @I9@,Jeff /Smith/,M,1 MAR 1999,Alive,18,@F7@,@F10@
 @I10@,Charles /Smith/,M,25 FEB 1926,16 SEP 1987,91,???,@F12@
-@I11@,Linda /Davis/,F,4 NOV 1967,5 FEB 2000,49,???,@F12@
+@I11@,Linda /Davis/,F,4 NOV 1967,5 FEB 2000,50,???,@F12@
 @I12@,Jennifer /Brown/,F,14 MAY 1968,Alive,49,???,@F11@
 @I13@,Arnold /Smith/,M,20 DEC 2000,Alive,16,@F6@,None
 @I14@,Jessica /Dunn/,F,5 MAR 1990,14 APR 1930,27,???,@F9@
@@ -61,3 +61,6 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US15_I17@,Childfifteen /Ofkids/,M,13 NOV 2011,Alive,5,@US15_F2@,None
 @US15_I18@,Childsixteen /Ofkids/,F,15 JUL 2012,Alive,5,@US15_F2@,None
 @US15_I19@,Wife /Ofkids/,F,4 APR 2005,Alive,12,???,@US15_F1@
+@US21_I1@,John /Smith/,M,1 JAN 1960,Alive,57,???,@US21_F2@
+@US21_I2@,Alexander /Smith/,F,4 APR 1980,Alive,37,@US21_F2@,@US21_F1@
+@US21_I3@,Alexa /Jones/,M,1 JUN 1981,Alive,36,???,@US21_F1@

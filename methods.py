@@ -45,11 +45,14 @@ def INDI_FAM_relations():
 				file2.readline()
 				birthH = None
 				birthW = None
-				
+				genderHusb = None
+				genderWife = None
+
 				for row2 in csv.reader(file2,delimiter=','):
 					if husb in row2:	#Pretty sure alot of the user stories are basic if statements in here then we can make it a more generic method name
 						birthH = row2[3]
 						deathH = row2[4]
+						genderHusb = row2[2]
 						if deathH != 'Alive':
 							deathH = datetime.datetime.strptime(deathH, '%d %b %Y').date()
 						if birthH != '??-??-????' or birthH != None:
@@ -57,6 +60,7 @@ def INDI_FAM_relations():
 					if wife in row2:
 						birthW =  row2[3]
 						deathW =  row2[4]
+						genderWife = row2[2]
 						if deathW != "Alive":
 							deathW = datetime.datetime.strptime(deathW, '%d %b %Y').date()
 						if birthW != '??-??-????' or birthW != None:
@@ -65,8 +69,8 @@ def INDI_FAM_relations():
 					if len(children) > 1:
 						for i in children:
 							if i in row2:
-								childbirth[i] = datetime.datetime.strptime(row2[3], '%d %b %Y').date()	
-						
+								childbirth[i] = datetime.datetime.strptime(row2[3], '%d %b %Y').date()
+
 						temp = childbirth.copy()
 						for key, value in childbirth.items():
 							temp.pop(key)
@@ -95,6 +99,8 @@ def INDI_FAM_relations():
 						US06(deathH, deathW, div, husb, wife)
 						#US01/04
 					US0104(div, today, husb, wife, married)
+				US21_Husband(genderHusb, husb)
+				US21_Wife(genderWife, wife)
 	return err
 
 def INDI_ONLY():
@@ -107,12 +113,12 @@ def INDI_ONLY():
 			age = int(row[5])
 			if dday != 'Alive':
 				dday = datetime.datetime.strptime(dday, '%d %b %Y').date()
-			
+
 				US01(today, dday, bday, row[0])
 				US03(dday, bday, row[0])
 			US07(age, row[0])
 	return 0
-	
+
 def US01(today, dday, bday, row):
 	if today < dday:
 		print('ERROR: US01: ' + row + "'s death(" + str(dday) + ") is after today(" + str(today) + ")")
@@ -138,7 +144,7 @@ def US0104(div, today, husb, wife, married):
 	else:
 		print("ERROR: GENERAL: Marriage or Divorce date for " + husb  + " and " + wife + " not available")
 	return r
-	
+
 def US0205(birthH, birthW, married, deathH, deathW, husb, wife):
 	r = True
 	if birthH > married:
@@ -162,7 +168,7 @@ def US0205(birthH, birthW, married, deathH, deathW, husb, wife):
 			print("ERROR: US05: " + husb + "'s death date(" + str(deathH) + ") is before marriage date(" + str(married) + ")")
 			r = False
 	return r
-	
+
 def US03(dday, bday, row):
 	if bday > dday:
 		print('ERROR: US03: ' + row + "'s death(" + str(dday) + ') is their before birth(' + str(bday) +')')
@@ -185,7 +191,7 @@ def US07(age, row):
 		print('ERROR: US07: ' + row + "'s age(" + str(age) + ") is older than 150 or less than 0.")
 		return False
 	return True
-	
+
 def US0809(div, married, deathH, deathW, x, row):
 	r = True
 	if div > datetime.datetime(1, 1, 1).date():
@@ -205,7 +211,7 @@ def US0809(div, married, deathH, deathW, x, row):
 			r = False
 			print('ERROR: US09: ' + x + "'s birthday(" + str(datetime.datetime.strptime(row, '%d %b %Y').date()) + ") is after their mothers's death(" + str(deathW) + ")")
 	return r
-	
+
 def US10():
     f = open("families.csv", "r")
     fString = f.read()
@@ -269,7 +275,7 @@ def US15(anArray, husb, wife):
 def US28():
     with open('families.csv','r+') as fp1:
         ret = True
-        i = 1 
+        i = 1
         for line in fp1.readlines():
             if i == 1:
                 i += 1
@@ -290,3 +296,20 @@ def US29():
                 print("ERROR: INDIVIDUAL: US29: Individual",lineS[0]," is not deceased")
                 ret = False
      return ret
+
+ #US21 Correct gender for role: Husband in family should be male and wife in family should be female
+def US21_Husband(genderHusb, husb):
+	if genderHusb != None:
+		if genderHusb != "M":
+			print("ERROR: US21: Husband {}'s gender is female".format(husb))
+			return False
+		else:
+			return True
+
+def US21_Wife(genderWife, wife):
+	if genderWife != None:
+		if genderWife != "F":
+			print("ERROR: US21: Wife {}'s gender is male".format(wife))
+			return False
+		else:
+			return True

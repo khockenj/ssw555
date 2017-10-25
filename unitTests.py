@@ -1,5 +1,5 @@
 import unittest
-from methods import US15
+from methods import US15, US21_Wife, US21_Husband
 
 class TestCases(unittest.TestCase):
 
@@ -21,6 +21,27 @@ class TestCases(unittest.TestCase):
         husb = "Ahusband"
         wife = "Awife"
         self.assertFalse(US15(array, husb, wife))
+
+#Tests for US21 Correct gender for role: Husband in family should be male and wife in family should be female
+    def test_US21_Wife_wifeIsCorrectGender(self):
+        genderWife = "F"
+        wife = "Awife"
+        self.assertTrue(US21_Wife(genderWife, wife))
+
+    def test_US21_Wife_wifeIsWrongGender(self):
+        genderWife = "M"
+        wife = "Awife"
+        self.assertFalse(US21_Wife(genderWife, wife))
+
+    def test_US21_Husband_husbandIsCorrectGender(self):
+        genderHusb = "M"
+        husb = "Ahusband"
+        self.assertTrue(US21_Husband(genderHusb, husb))
+
+    def test_US21_husbanIsWrongGender(self):
+        genderHusb = "F"
+        husb = "Ahusband"
+        self.assertFalse(US21_Husband(genderHusb, husb))
 
 if __name__ == '__main__':
     unittest.main()
