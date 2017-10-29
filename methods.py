@@ -345,13 +345,14 @@ def US23():
     for i in range(len(ilist) - 2):
         j = i+1
         if (ilist[i][1] == ilist[j][1]) & (ilist[j][3] == ilist[j][3]):
-            print('ERROR: INDIVIDUAL: US23: ' + ilist[i][0] + 'and' + ilist[j][0] + 'have same name and date of birth')
+            print('ERROR: INDIVIDUAL: US23:    ' + ilist[i][0] + '  and  ' + ilist[j][0] + '  have same name and date of birth')
             flag = 1
 
     if flag == 1:
         return False
     else:
         return True
+
 
 # US25
 def US25():
@@ -370,10 +371,11 @@ def US25():
     for i in range(len(ilist) - 2):
         j = i+1
         if (ilist[i][1] == ilist[j][1]) & (ilist[j][3] == ilist[j][3]):
-            print('ERROR: INDIVIDUAL: US25: ' + ilist[i][0] + 'and' + ilist[j][0] + 'childs have same name and date of birth')
+            print('ERROR: INDIVIDUAL: US25:   ' + ilist[i][0] + '   and   ' + ilist[j][0] + '   childs have same name and date of birth')
             flag = 1
 
     if flag == 1:
         return False
     else:
         return True
+
