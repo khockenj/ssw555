@@ -1,5 +1,5 @@
 import unittest
-from methods import US15, US21_Wife, US21_Husband
+from methods import US15, US21_Wife, US21_Husband, US22
 
 class TestCases(unittest.TestCase):
 
@@ -42,6 +42,15 @@ class TestCases(unittest.TestCase):
         genderHusb = "F"
         husb = "Ahusband"
         self.assertFalse(US21_Husband(genderHusb, husb))
+
+#Tests for US22 Unique IDs:	All individual IDs should be unique and all family IDs should be unique
+    def test_US22_noDuplicateIDs(self):
+        IDs = ["F1", "F2", "F3"]
+        self.assertTrue(US22(IDs))
+
+    def test_US22_duplicateIDs(self):
+        IDs = ["I1", "I2", "I1"]
+        self.assertFalse(US22(IDs))
 
 if __name__ == '__main__':
     unittest.main()

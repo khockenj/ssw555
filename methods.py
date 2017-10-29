@@ -24,6 +24,7 @@ def days_difference(d1, d2, type):
 
 def INDI_FAM_relations():
 	err = []
+	famIDs = []
 	today = datetime.datetime.today().date()
 	with open('families.csv') as file1:
 		file1.readline()
@@ -39,6 +40,7 @@ def INDI_FAM_relations():
 			husb = row[3]
 			wife = row[5]
 			children = row[7].split(" ")
+			famIDs.append(row[0])
 			childbirth = {}
 			count = 0
 			with open('individuals.csv') as file2:
@@ -101,22 +103,26 @@ def INDI_FAM_relations():
 					US0104(div, today, husb, wife, married)
 				US21_Husband(genderHusb, husb)
 				US21_Wife(genderWife, wife)
+		US22(famIDs)
 	return err
 
 def INDI_ONLY():
 	today = datetime.datetime.today().date()
+	indIDs = []
 	with open("individuals.csv", "r") as file:
 		file.readline()
 		for row in csv.reader(file, delimiter=','):
 			bday = datetime.datetime.strptime(row[3], '%d %b %Y').date()
 			dday = row[4]
 			age = int(row[5])
+			indIDs.append(row[0])
 			if dday != 'Alive':
 				dday = datetime.datetime.strptime(dday, '%d %b %Y').date()
 
 				US01(today, dday, bday, row[0])
 				US03(dday, bday, row[0])
 			US07(age, row[0])
+	US22(indIDs)
 	return 0
 
 def US01(today, dday, bday, row):
@@ -313,3 +319,11 @@ def US21_Wife(genderWife, wife):
 			return False
 		else:
 			return True
+
+#US22 Unique IDs:	All individual IDs should be unique and all family IDs should be unique
+def US22(listOfIDs):
+	for i in listOfIDs:
+		if listOfIDs.count(i) > 1:
+			print("ERROR: US22: The ID: {} is not unique, it is used more than once".format(i))
+			return False
+	return True

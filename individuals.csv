@@ -6,7 +6,7 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I5@,Jason /Smith/,M,6 MAR 1966,2 SEP 1990,51,@F3@,@F7@
 @I6@,Joe /Doe/,M,12 APR 1927,Alive,90,???,@F9@
 @I7@,Dorothy /Williams/,F,11 JAN 1928,17 JUL 2010,89,???,@F8@
-@I8@,Elizabeth /Johnson/,F,19 NOV 1930,13 OCT 2013,86,???,@F11@
+@I8@,Elizabeth /Johnson/,F,19 NOV 1930,13 OCT 2013,87,???,@F11@
 @I9@,Jeff /Smith/,M,1 MAR 1999,Alive,18,@F7@,@F10@
 @I10@,Charles /Smith/,M,25 FEB 1926,16 SEP 1987,91,???,@F12@
 @I11@,Linda /Davis/,F,4 NOV 1967,5 FEB 2000,50,???,@F12@
@@ -64,3 +64,5 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US21_I1@,John /Smith/,M,1 JAN 1960,Alive,57,???,@US21_F2@
 @US21_I2@,Alexander /Smith/,F,4 APR 1980,Alive,37,@US21_F2@,@US21_F1@
 @US21_I3@,Alexa /Jones/,M,1 JUN 1981,Alive,36,???,@US21_F1@
+@US22_I1@,Bob /Smith/,M,2 FEB 1960,Alive,57,???,@US22_F1@
+@US22_I1@,Alexa /Johnson/,F,1 JAN 1961,Alive,56,???,@US22_F1@
