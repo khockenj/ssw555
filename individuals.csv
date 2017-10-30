@@ -66,3 +66,9 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US21_I3@,Alexa /Jones/,M,1 JUN 1981,Alive,36,???,@US21_F1@
 @US22_I1@,Bob /Smith/,M,2 FEB 1960,Alive,57,???,@US22_F1@
 @US22_I1@,Alexa /Johnson/,F,1 JAN 1961,Alive,56,???,@US22_F1@
+@US23/251@,Like /Vegas/,M,1 JAN 2000,Alive,17,???,@US23/251@
+@US23/252@,Kike /Vegan/,F,1 JAN 2000,Alive,17,???,@US23/251@
+@US23/253@,Dike /Vegas/,M,1 JAN 2016,Alive,1,@US23/251@,None
+@US23/254@,Dike /Vegas/,M,1 JAN 2016,Alive,1,@US23/251@,@US23/252@
+@US23/255@,Jike /Vegan/,F,1 JAN 2016,Alive,1,???,@US23/252@
+@US23/256@,Bike /Vegas/,F,1 JAN 2016,Alive,1,@US23/252@,None

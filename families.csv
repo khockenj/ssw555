@@ -19,3 +19,6 @@ FID,Married,Divorced,Husband ID,Husband Name,Wife ID,Wife Name,Children
 @US21_F1@,Years not provided,Years not provided,@US21_I2@,Alexander /Smith/,@US21_I3@,Alexa /Jones/,
 @US21_F2@,Years not provided,Years not provided,@US21_I1@,John /Smith/,@US21_I3@,Alexa /Jones/,@US21_I2@
 @US22_F1@,Years not provided,Years not provided,@US22_I1@,Unknown,@US22_I1@,Unknown,
+@US22_F1@,Years not provided,Years not provided,@US22_I1@,Alexa /Johnson/,@US22_I1@,Unknown,
+@US23/251@,1 JAN 2015,Years not provided,@US23/251@,@US23/251@,@US23/252@,@US23/254@,@US23/253@ @US23/254@
+@US23/252@,Years not provided,Years not provided,@US23/254@,Unknown,@US23/255@,Unknown,@US23/256@
