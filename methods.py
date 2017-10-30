@@ -2,7 +2,7 @@
 import warnings
 import csv
 import datetime
-
+from datetime import date
 def afterDate(d1, d2):
 	if not isinstance(d1, datetime.date):
 		d1 = datetime.datetime.strptime(d1, '%d %b %Y').date()
@@ -379,3 +379,26 @@ def US25():
     else:
         return True
 
+def US31():
+    with open("individuals.csv", "r+") as fp:
+        for line in fp.readlines():
+            lineS = line.split(",")
+            if (lineS[4] == 'Alive') and ("None" in lineS[7]) and (int(lineS[5]) > 30):
+                print ("INDIVIDUAL: US31:",lineS[0],"is alive who is above 30 years in age and never been married")
+
+def US35():
+    with open("Individuals1.csv", "r+") as fp:
+        i = 0
+        for line in fp.readlines():
+            if (i == 0):
+                i += 1
+                continue
+            lineS = line.split(",")
+            today = date.today()
+            today = datetime.datetime(today.year, today.month, today.day)
+            today.strftime('%d-%b-%y')
+            diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
+            diff = int(str(diff).split()[0])
+            if(0<diff and diff< 30):
+                print ("INDIVIDUAL: US35:",lineS[0],"was born in the last 30 days")
+            i += 1
