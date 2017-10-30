@@ -1,0 +1,13 @@
+ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
+@I15@,Sam /Anderson/,M,7-Aug-57,Alive,60,???,None
+@I17@,Lilly /Anderson/,F,16-Jun-60,Alive,57,???,None
+@I18@,Robert /Anderson/,M,16-Sep-77,Alive,40,???,None
+@I19@,Julie /Anderson/,F,7-May-80,Alive,37,???,None
+@I20@,Jonathan /Sam/,M,6-Oct-80,Alive,37,???,None
+@I21@,Angelina /Gilbert/,F,17-Jun-82,Alive,35,???,None
+@I22@,Stevens /David/,M,16-Jun-78,Alive,39,???,None
+@I23@,Molly /Fischer/,F,16-Jun-79,Alive,38,???,None
+@I24@,Sam /Rovins/,M,17-Jun-80,Alive,37,???,None
+@I25@,Emily /Sam/,F,5-Jun-83,Alive,34,???,None
+@I26@,Agatha /Bill/,F,20-May-81,Alive,36,???,None
+@I31@,Johnson /Johnson/,M,23-Jul-85,Alive,202,???,None
