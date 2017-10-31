@@ -47,6 +47,8 @@ def INDI_FAM_relations():
 				file2.readline()
 				birthH = None
 				birthW = None
+				deathH = None
+				deathW = None
 				genderHusb = None
 				genderWife = None
 
@@ -91,6 +93,11 @@ def INDI_FAM_relations():
 							for x in children: #x = childID
 								if x in row2:
 										US0809(div, married, deathH, deathW, x, row2[3])
+					if ((deathH != "Alive" or deathH == today) and (deathW != "Alive" or deathW == today)) and (deathW != None and deathH != None):
+						if len(children) > 0:
+							for x in children:
+								if x in row2:
+									US33(row2[5])
 				US15(children, husb, wife)
 					#US02/03 Birth after marriage, death before marriage
 				if birthW != None and birthH != None:
@@ -101,6 +108,7 @@ def INDI_FAM_relations():
 						US06(deathH, deathW, div, husb, wife)
 						#US01/04
 					US0104(div, today, husb, wife, married)
+				US34(birthH, birthW, today, husb, wife)
 				US21_Husband(genderHusb, husb)
 				US21_Wife(genderWife, wife)
 		US22(famIDs)
@@ -386,6 +394,21 @@ def US31():
             if (lineS[4] == 'Alive') and ("None" in lineS[7]) and (int(lineS[5]) > 30):
                 print ("INDIVIDUAL: US31:",lineS[0],"is alive who is above 30 years in age and never been married")
 
+def US33(row2):
+	if int(row2) < 18:
+		print("ERROR: US33: " + row2[0] + " is an orphan")
+		return False
+	return True
+	
+def US34(birthH, birthW, today, husb, wife):
+	if int(days_difference(birthW, today, 'years')) < int(days_difference(birthH, today, 'years')) * 2:
+		print("ERROR: US34: Husband (" + husb + ") is at least double wife(" + wife + ")'s age")
+		return False
+	elif int(days_difference(birthH, today, 'years')) < int(days_difference(birthW, today, 'years')) * 2:
+		print("ERROR: US34: Wife (" + wife + ") is at least double husband(" + husb + ")'s age")
+		return False
+	return True 
+	
 def US35():
     with open("Individuals1.csv", "r+") as fp:
         i = 0
