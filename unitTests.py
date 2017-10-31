@@ -64,3 +64,26 @@ def test_US13():
 	temp = childbirth.copy()
 	count = 0
 	assert US13(childbirth, temp, children, count) == 1
+def test_US3301():
+	age = 19
+	name = "US34ID"
+	assert US33(age, name) == True
+def test_US3302():
+	age = 16
+	name = "US34ID2"
+	assert US33(age, name) == False
+def test_US3401():
+	birthH = datetime.datetime(1970,1,17).date()
+	birthW = datetime.datetime(2010,5,10).date()
+	today = datetime.datetime.today().date()
+	husb = "HUSBID"
+	wife = "WIFEID"
+	assert US34(birthH, birthW, today, husb, wife) == False
+def test_US3402():
+	birthH = datetime.datetime(1972,8,21).date()
+	birthW = datetime.datetime(1975,3,16).date()
+	today = datetime.datetime.today().date()
+	husb = "HUSBID2"
+	wife = "WIFEID2"
+	assert US34(birthH, birthW, today, husb, wife) == False
+	
