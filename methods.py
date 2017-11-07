@@ -425,3 +425,38 @@ def US35():
             if(0<diff and diff< 30):
                 print ("INDIVIDUAL: US35:",lineS[0],"was born in the last 30 days")
             i += 1
+	
+def US36():
+    with open("Individuals1.csv", "r+") as fp:
+        i = 0
+        for line in fp.readlines():
+            if (i == 0):
+                i += 1
+                continue
+            lineS = line.split(",")
+            if (lineS[4]!='Alive'):
+              today = date.today()
+              today = datetime.datetime(today.year, today.month, today.day)
+              today.strftime('%d-%b-%y')
+              diff =  today - (datetime.datetime.strptime(lineS[4], '%d-%b-%y'))
+              diff = int(str(diff).split()[0])
+              if (0<diff and diff< 30):
+                 print ("INDIVIDUAL: US36:",lineS[0],"has died in the last 30 days")
+              i += 1
+              
+def US38():
+    with open("Individuals1.csv", "r+") as fp:
+        i = 0
+        for line in fp.readlines():
+            if (i == 0):
+                i += 1
+                continue
+            lineS = line.split(",")
+            today = date.today()
+            today = datetime.datetime(today.year, today.month, today.day)
+            today.strftime('%d-%b-%y')
+            diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
+            diff = int(str(diff).split()[0])
+            if(-30<diff and diff<0):
+                print ("INDIVIDUAL: US38:",lineS[0],"has an upcoming birthday in the next 30 days")
+            i += 1
