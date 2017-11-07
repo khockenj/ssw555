@@ -14,7 +14,7 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I13@,Arnold /Smith/,M,20-Dec-00,Alive,16,@F6@,None
 @I14@,Jessica /Dunn/,F,5-Mar-90,14-Apr-30,27,???,@F9@
 @I15@,Sam /Anderson/,M,7-Aug-57,Alive,60,???,None
-@I16@,Mary /Jacobs/,F,13-Aug-02,7-Sep-00,15,???,None
+@I16@,Mary /Jacobs/,F,13-Aug-02,25-Oct-17,15,???,None
 @I17@,Lilly /Anderson/,F,16-Jun-60,Alive,57,???,None
 @I18@,Robert /Anderson/,M,16-Sep-77,Alive,40,???,None
 @I19@,Julie /Anderson/,F,7-May-80,Alive,37,???,None
@@ -26,8 +26,8 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I25@,Emily /Sam/,F,5-Jun-83,Alive,34,???,None
 @I26@,Agatha /Bill/,F,20-May-81,Alive,36,???,None
 @I27@,James /Rovins/,M,11-Jul-03,Alive,14,???,None
-@I28@,Oliver /Stevens/,M,16-Oct-17,Alive,17,???,None
-@I29@,Rosie /Jonathan/,F,23-Jul-02,Alive,15,???,None
+@I28@,Oliver /Stevens/,M,19-Oct-17,Alive,0,???,None
+@I29@,Rosie /Jonathan/,F,23-Nov-17,Alive,-1,???,None
 @I30@,Johnson /Johnson/,M,23-Jul-20,Alive,-1,???,None
 @I31@,Johnson /Johnson/,M,23-Jul-85,Alive,202,???,None
 @I32@,Help /Me/,F,23-Jul-85,10-Apr-20,217,???,None
