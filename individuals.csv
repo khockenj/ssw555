@@ -14,7 +14,7 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I13@,Arnold /Smith/,M,20 DEC 2000,Alive,16,@F6@,None
 @I14@,Jessica /Dunn/,F,5 MAR 1990,14 APR 1930,27,???,@F9@
 @I15@,Sam /Anderson/,M,7 AUG 1957,Alive,60,???,None
-@I16@,Mary /Jacobs/,F,13 AUG 2002,7 SEP 2000,15,???,None
+@I16@,Mary /Jacobs/,F,13 AUG 2002,25 OCT 2017,15,???,None
 @I17@,Lilly /Anderson/,F,16 JUN 1960,Alive,57,???,None
 @I18@,Robert /Anderson/,M,16 SEP 1977,Alive,40,???,None
 @I19@,Julie /Anderson/,F,7 MAY 1980,Alive,37,???,None
@@ -26,8 +26,8 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I25@,Emily /Sam/,F,5 JUN 1983,Alive,34,???,None
 @I26@,Agatha /Bill/,F,20 MAY 1981,Alive,36,???,None
 @I27@,James /Rovins/,M,11 JUL 2003,Alive,14,???,None
-@I28@,Oliver /Stevens/,M,16 JUN 2000,Alive,17,???,None
-@I29@,Rosie /Jonathan/,F,23 JUL 2002,Alive,15,???,None
+@I28@,Oliver /Stevens/,M,19 OCT 2017,Alive,0,???,None
+@I29@,Rosie /Jonathan/,F,23 NOV 2017,Alive,-1,???,None
 @I30@,Johnson /Johnson/,M,23 JUL 2120,Alive,-1,???,None
 @I31@,Johnson /Johnson/,M,23 JUL 1815,Alive,202,???,None
 @I32@,Help /Me/,F,20 MAY 1800,10 APR 2020,217,???,None
@@ -57,8 +57,8 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US15_I13@,Childelleven /Ofkids/,M,4 JAN 2007,Alive,10,@US15_F2@,None
 @US15_I14@,Childtwelve /Ofkids/,F,4 OCT 2008,Alive,9,@US15_F2@,None
 @US15_I15@,Childthirteen /Ofkids/,M,15 AUG 2009,Alive,8,@US15_F2@,None
-@US15_I16@,Childfourteen /Ofkids/,F,12 NOV 2010,Alive,6,@US15_F2@,None
-@US15_I17@,Childfifteen /Ofkids/,M,13 NOV 2011,Alive,5,@US15_F2@,None
+@US15_I16@,Childfourteen /Ofkids/,F,12 NOV 2010,Alive,7,@US15_F2@,None
+@US15_I17@,Childfifteen /Ofkids/,M,13 NOV 2011,Alive,6,@US15_F2@,None
 @US15_I18@,Childsixteen /Ofkids/,F,15 JUL 2012,Alive,5,@US15_F2@,None
 @US15_I19@,Wife /Ofkids/,F,4 APR 2005,Alive,12,???,@US15_F1@
 @US21_I1@,John /Smith/,M,1 JAN 1960,Alive,57,???,@US21_F2@

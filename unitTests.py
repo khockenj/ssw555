@@ -1,5 +1,5 @@
 import unittest
-from methods import US15, US21_Wife, US21_Husband, US22
+from methods import US15, US21_Wife, US21_Husband, US22, US30
 
 class TestCases(unittest.TestCase):
 
@@ -52,6 +52,31 @@ class TestCases(unittest.TestCase):
         IDs = ["I1", "I2", "I1"]
         self.assertFalse(US22(IDs))
 
+#Tests for US30
+    def test_US30_aliveMarried(self):
+        dday = "Alive"
+        spouseIn = "F2"
+        personID = "I1"
+        self.assertTrue(US30(dday, spouseIn, personID))
+
+    def test_US30_deadMarried(self):
+        dday = "11/11/17"
+        spouseIn = "F2"
+        personID = "I2"
+        self.assertFalse(US30(dday, spouseIn, personID))
+
+    def test_US30_aliveNotMarried(self):
+        dday = "Alive"
+        spouseIn = "None"
+        personID = "I3"
+        self.assertFalse(US30(dday, spouseIn, personID))
+
+    def test_US30_deadNotMarried(self):
+        dday = "11/11/17"
+        spouseIn = "None"
+        personID = "I4"
+        self.assertFalse(US30(dday, spouseIn, personID))
+
 if __name__ == '__main__':
     unittest.main()
 def test_US27():
@@ -86,4 +111,3 @@ def test_US3402():
 	husb = "HUSBID2"
 	wife = "WIFEID2"
 	assert US34(birthH, birthW, today, husb, wife) == False
-	

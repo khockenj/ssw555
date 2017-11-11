@@ -123,6 +123,10 @@ def INDI_ONLY():
 			bday = datetime.datetime.strptime(row[3], '%d %b %Y').date()
 			dday = row[4]
 			age = int(row[5])
+			spouseIn = row[7]
+			personID = row[0]
+			indIDs.append(row[0])
+			US30(dday, spouseIn, personID)
 			indIDs.append(row[0])
 			if dday != 'Alive':
 				dday = datetime.datetime.strptime(dday, '%d %b %Y').date()
@@ -336,7 +340,7 @@ def US22(listOfIDs):
 			return False
 	return True
 
-# US23 
+# US23
 def US23():
 
     i = open("individuals.csv", "r")
@@ -399,7 +403,7 @@ def US33(row2):
 		print("ERROR: US33: " + row2[0] + " is an orphan")
 		return False
 	return True
-	
+
 def US34(birthH, birthW, today, husb, wife):
 	if int(days_difference(birthW, today, 'years')) < int(days_difference(birthH, today, 'years')) * 2:
 		print("ERROR: US34: Husband (" + husb + ") is at least double wife(" + wife + ")'s age")
@@ -407,8 +411,8 @@ def US34(birthH, birthW, today, husb, wife):
 	elif int(days_difference(birthH, today, 'years')) < int(days_difference(birthW, today, 'years')) * 2:
 		print("ERROR: US34: Wife (" + wife + ") is at least double husband(" + husb + ")'s age")
 		return False
-	return True 
-	
+	return True
+
 def US35():
     with open("Individuals1.csv", "r+") as fp:
         i = 0
@@ -425,7 +429,7 @@ def US35():
             if(0<diff and diff< 30):
                 print ("INDIVIDUAL: US35:",lineS[0],"was born in the last 30 days")
             i += 1
-	
+
 def US36():
     with open("Individuals1.csv", "r+") as fp:
         i = 0
@@ -443,7 +447,7 @@ def US36():
               if (0<diff and diff< 30):
                  print ("INDIVIDUAL: US36:",lineS[0],"has died in the last 30 days")
               i += 1
-              
+
 def US38():
     with open("Individuals1.csv", "r+") as fp:
         i = 0
@@ -460,3 +464,9 @@ def US38():
             if(-30<diff and diff<0):
                 print ("INDIVIDUAL: US38:",lineS[0],"has an upcoming birthday in the next 30 days")
             i += 1
+
+def US30(dday, spouseIn, personID):
+	if (dday == "Alive" and spouseIn != "None"):
+		print("INDIVIDUAL: US30: " + personID + " is living and married")
+		return True
+	return False
