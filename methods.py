@@ -452,12 +452,11 @@ def US38():
                 i += 1
                 continue
             lineS = line.split(",")
-	    if (lineS[4]=='Alive'):
-              today = date.today()
-              today = datetime.datetime(today.year, today.month, today.day)
-              today.strftime('%d-%b-%y')
-              diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
-              diff = int(str(diff).split()[0])
-              if(-30<diff and diff<0):
-                  print ("INDIVIDUAL: US38:",lineS[0],"has an upcoming birthday in the next 30 days")
-              i += 1
+            today = date.today()
+            today = datetime.datetime(today.year, today.month, today.day)
+            today.strftime('%d-%b-%y')
+            diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
+            diff = int(str(diff).split()[0])
+            if(-30<diff and diff<0):
+                print ("INDIVIDUAL: US38:",lineS[0],"has an upcoming birthday in the next 30 days")
+            i += 1
