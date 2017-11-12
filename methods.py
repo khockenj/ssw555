@@ -120,7 +120,11 @@ def INDI_ONLY():
 	with open("individuals.csv", "r") as file:
 		file.readline()
 		for row in csv.reader(file, delimiter=','):
-			bday = datetime.datetime.strptime(row[3], '%d %b %Y').date()
+			try:
+				bday = datetime.datetime.strptime(row[3], '%d %b %Y').date()
+			except:
+				pass
+			US42(row[3])
 			dday = row[4]
 			age = int(row[5])
 			spouseIn = row[7]
@@ -470,3 +474,11 @@ def US30(dday, spouseIn, personID):
 		print("INDIVIDUAL: US30: " + personID + " is living and married")
 		return True
 	return False
+
+def US42(date):
+	try:
+		date = datetime.datetime.strptime(date, '%d %b %Y').date()
+	except:
+		print("ERROR: US42: Illegitemate date")
+		return False
+	return True

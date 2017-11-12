@@ -29,7 +29,10 @@ with open(openedFile, 'r') as in_file:
 					sex = lineS[2].strip()
 				elif lineS[1].strip() == 'BIRT':
 					birth = " ".join(next(in_file).split(" ")[2:]).strip()
-					birthDate = datetime.strptime(birth, '%d %b %Y').date()
+					try:
+						birthDate = datetime.strptime(birth, '%d %b %Y').date()
+					except:
+						pass
 					age = int((meths.days_difference(birthDate, today,'years')))
 				elif lineS[1].strip() == 'DEAT':
 					death = " ".join(next(in_file).split(" ")[2:]).strip()

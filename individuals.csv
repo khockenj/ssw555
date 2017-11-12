@@ -72,3 +72,4 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US23/254@,Dike /Vegas/,M,1 JAN 2016,Alive,1,@US23/251@,@US23/252@
 @US23/255@,Jike /Vegan/,F,1 JAN 2016,Alive,1,???,@US23/252@
 @US23/256@,Bike /Vegas/,F,1 JAN 2016,Alive,1,@US23/252@,None
+@US42_I1@,Invalid /Date/,M,30 FEB 2015,1 JAN 2017,1,???,None

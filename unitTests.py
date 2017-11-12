@@ -1,5 +1,5 @@
 import unittest
-from methods import US15, US21_Wife, US21_Husband, US22, US30
+from methods import US15, US21_Wife, US21_Husband, US22, US30, US42
 
 class TestCases(unittest.TestCase):
 
@@ -76,6 +76,14 @@ class TestCases(unittest.TestCase):
         spouseIn = "None"
         personID = "I4"
         self.assertFalse(US30(dday, spouseIn, personID))
+
+    def test_US42_aValidDate(self):
+        date = "4 APR 2005"
+        self.assertTrue(US42(date))
+
+    def test_US42_anInvalidDate(self):
+        date = "200 APR 2005"
+        self.assertFalse(US42(date))
 
 if __name__ == '__main__':
     unittest.main()
