@@ -479,6 +479,6 @@ def US42(date):
 	try:
 		date = datetime.datetime.strptime(date, '%d %b %Y').date()
 	except:
-		print("ERROR: US42: Illegitemate date")
+		print("ERROR: US42: Illegitemate date: " + date + " is not valid")
 		return False
 	return True
