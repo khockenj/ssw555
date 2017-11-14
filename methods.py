@@ -96,11 +96,9 @@ def INDI_FAM_relations():
 						for key, value in childbirth2.items():
 							temp2.pop(key)
 							for key2, value2 in temp2.items():
-								if value == value2 and value != "None" and count < len(children)-1:
-									print("value2: " + value2 + " value: " + value)
-									count += 1
-									print("ERROR: US18: " + key + " and " + key2 + " are married AND siblings")
-
+								if count < len(children)-1:
+									
+									count += US18(value, value2, key, key2)
 					#US08/09
 					if birthW != None and birthH != None:
 						if len(children) > 0:
@@ -502,3 +500,10 @@ def US42(date):
 def US39(married, today, tempNum, husb, wife):
 	if (int(days_difference(married, today, 'days')) - 365*tempNum) <= 30:
 		print("ERROR: US39: Anniversary between " + husb + " and " + wife)
+		return True
+	return False
+def US18(value, value2, key, key2):
+	if value == value2 and value != "None":
+		print("ERROR: US18: " + key + " and " + key2 + " are married AND siblings")
+		return 1
+	return 0
