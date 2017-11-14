@@ -11,7 +11,7 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @I10@,Charles /Smith/,M,25-Feb-26,16-Sep-87,91,???,@F12@
 @I11@,Linda /Davis/,F,4-Nov-67,5-Feb-00,49,???,@F12@
 @I12@,Jennifer /Brown/,F,14-May-68,Alive,49,???,@F11@
-@I13@,Arnold /Smith/,M,20-Dec-00,Alive,16,@F6@,None
+@I13@,Arnold /Smith/,M,10-Dec-00,Alive,16,@F6@,None
 @I14@,Jessica /Dunn/,F,5-Mar-90,14-Apr-30,27,???,@F9@
 @I15@,Sam /Anderson/,M,7-Aug-57,Alive,60,???,None
 @I16@,Mary /Jacobs/,F,13-Aug-02,25-Oct-17,15,???,None
