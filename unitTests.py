@@ -146,5 +146,5 @@ def test_US1802():
 	key = "ID1"
 	key2 = "ID2"
 	value = "@FAM1@"
-	value2 = "@FAM2"
+	value2 = "@FAM2@"
 	assert US18(value, value2, key, key2) == 0
