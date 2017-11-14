@@ -119,3 +119,32 @@ def test_US3402():
 	husb = "HUSBID2"
 	wife = "WIFEID2"
 	assert US34(birthH, birthW, today, husb, wife) == False
+def test_US3901():
+	married = datetime.datetime(2011,11,30).date()
+	tempNum = 6
+	today = datetime.datetime.today().date()
+	husb = "HUSBID"
+	wife = "WIFEID"
+	assert US39(married, today, tempNum, husb, wife) == True
+
+def test_US3902():
+	married = datetime.datetime(2011,5,10).date()
+	tempNum = 6
+	today = datetime.datetime.today().date()
+	husb = "HUSBID"
+	wife = "WIFEID"
+	assert US39(married, today, tempNum, husb, wife) == False
+	
+def test_US1801():
+	key = "ID1"
+	key2 = "ID2"
+	value = "@FAM1@"
+	value2 = "@FAM1@"
+	assert US18(value, value2, key, key2) == 1
+
+def test_US1802():
+	key = "ID1"
+	key2 = "ID2"
+	value = "@FAM1@"
+	value2 = "@FAM2"
+	assert US18(value, value2, key, key2) == 0
