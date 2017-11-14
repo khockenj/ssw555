@@ -43,9 +43,9 @@ ID,Name,Gender,Birthday,Death,Age,Child in,Spouse in
 @US14/15-10@,Fim /Taat/,M,1 JAN 2014,Alive,3,@US14/15F1@,None
 @US14/15-11@,Taati /Taat/,F,1 JAN 2015,Alive,2,@US14/15F1@,None
 @US15_I1@,Alot /Ofkids/,M,2 JAN 1985,Alive,32,???,@US15_F2@
-@US15_I2@,Childone /Ofkids/,M,5 JUN 1966,Alive,51,@US15_F2@,@US15_F1@
+@US15_I2@,Childone /Ofkids/,M,5 JUN 1966,Alive,51,@US15_F2@,@US18_F0@
 @US15_I3@,Miss /Ofkids/,F,4 JUL 1984,Alive,33,???,@US15_F2@
-@US15_I4@,Childtwo /Ofkids/,F,12 MAR 2000,Alive,17,@US15_F2@,None
+@US15_I4@,Childtwo /Ofkids/,F,12 MAR 2000,Alive,17,@US15_F2@,@US18_F0@
 @US15_I5@,Childthree /Ofkids/,M,4 JAN 2001,Alive,16,@US15_F2@,None
 @US15_I6@,Childfour /Ofkids/,F,25 FEB 2001,Alive,16,@US15_F2@,None
 @US15_I7@,Childfive /Ofkids/,M,20 MAY 2002,Alive,15,@US15_F2@,None

@@ -42,6 +42,7 @@ def INDI_FAM_relations():
 			children = row[7].split(" ")
 			famIDs.append(row[0])
 			childbirth = {}
+			childbirth2 = {}
 			count = 0
 			with open('individuals.csv') as file2:
 				file2.readline()
@@ -87,6 +88,19 @@ def INDI_FAM_relations():
 									count += 1
 									us13e = True
 									print("ERROR: US13: " + key + "'s (" + str(value) + ") and " + key2 + "'s birthday(" + str(value2) + ") are either less than 8 months apart or more than 2 days apart")
+						if len(children) > 1:
+							for i in children:
+								if i in row2:
+									childbirth2[i] = row2[7]
+						temp2 = childbirth2.copy()
+						for key, value in childbirth2.items():
+							temp2.pop(key)
+							for key2, value2 in temp2.items():
+								if value == value2 and value != "None" and count < len(children)-1:
+									print("value2: " + value2 + " value: " + value)
+									count += 1
+									print("ERROR: US18: " + key + " and " + key2 + " are married AND siblings")
+
 					#US08/09
 					if birthW != None and birthH != None:
 						if len(children) > 0:
@@ -107,6 +121,8 @@ def INDI_FAM_relations():
 					if div > datetime.datetime(1, 1, 1).date() and isinstance(div, datetime.date):
 						US06(deathH, deathW, div, husb, wife)
 						#US01/04
+					tempNum = int(days_difference(married, today, 'years'))
+					US39(married, today, tempNum, husb, wife)
 					US0104(div, today, husb, wife, married)
 				US34(birthH, birthW, today, husb, wife)
 				US21_Husband(genderHusb, husb)
@@ -418,7 +434,7 @@ def US34(birthH, birthW, today, husb, wife):
 	return True
 
 def US35():
-    with open("Individuals1.csv", "r+") as fp:
+    with open("Individuals.csv", "r+") as fp:
         i = 0
         for line in fp.readlines():
             if (i == 0):
@@ -428,14 +444,14 @@ def US35():
             today = date.today()
             today = datetime.datetime(today.year, today.month, today.day)
             today.strftime('%d-%b-%y')
-            diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
+            diff =  today - (datetime.datetime.strptime(lineS[3], '%d %b %Y'))
             diff = int(str(diff).split()[0])
             if(0<diff and diff< 30):
                 print ("INDIVIDUAL: US35:",lineS[0],"was born in the last 30 days")
             i += 1
 
 def US36():
-    with open("Individuals1.csv", "r+") as fp:
+    with open("Individuals.csv", "r+") as fp:
         i = 0
         for line in fp.readlines():
             if (i == 0):
@@ -446,14 +462,14 @@ def US36():
               today = date.today()
               today = datetime.datetime(today.year, today.month, today.day)
               today.strftime('%d-%b-%y')
-              diff =  today - (datetime.datetime.strptime(lineS[4], '%d-%b-%y'))
+              diff =  today - (datetime.datetime.strptime(lineS[4], '%d %b %y'))
               diff = int(str(diff).split()[0])
               if (0<diff and diff< 30):
                  print ("INDIVIDUAL: US36:",lineS[0],"has died in the last 30 days")
               i += 1
 
 def US38():
-    with open("Individuals1.csv", "r+") as fp:
+    with open("Individuals.csv", "r+") as fp:
         i = 0
         for line in fp.readlines():
             if (i == 0):
@@ -463,7 +479,7 @@ def US38():
             today = date.today()
             today = datetime.datetime(today.year, today.month, today.day)
             today.strftime('%d-%b-%y')
-            diff =  today - (datetime.datetime.strptime(lineS[3], '%d-%b-%y'))
+            diff =  today - (datetime.datetime.strptime(lineS[3], '%d %b %y'))
             diff = int(str(diff).split()[0])
             if(-30<diff and diff<0):
                 print ("INDIVIDUAL: US38:",lineS[0],"has an upcoming birthday in the next 30 days")
@@ -482,3 +498,7 @@ def US42(date):
 		print("ERROR: US42: Illegitemate date: " + date + " is not valid")
 		return False
 	return True
+	
+def US39(married, today, tempNum, husb, wife):
+	if (int(days_difference(married, today, 'days')) - 365*tempNum) <= 30:
+		print("ERROR: US39: Anniversary between " + husb + " and " + wife)
