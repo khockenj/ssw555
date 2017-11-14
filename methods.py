@@ -507,3 +507,67 @@ def US18(value, value2, key, key2):
 		print("ERROR: US18: " + key + " and " + key2 + " are married AND siblings")
 		return 1
 	return 0
+import re
+
+def US16():
+    i = open("individuals.csv", "r")
+    iString = i.read()
+
+    ilist = []
+    for line in iString.split("\n"):
+        ilist.append(line.split(","))
+
+    f = open("families.csv", "r")
+    fString = f.read()
+
+    flist = []
+    for line in fString.split("\n"):
+        flist.append(line.split(","))
+
+    del flist[0]
+    child_list = []
+    flag = 0
+
+    for i in range(len(flist) - 1):
+        if flist[i][4] != 'Unknown':
+            name = flist[i][4]
+            name_index = flist[i][4].index('/')
+            surname = name[name_index:]
+            list = re.findall(r'\S+', flist[i][7])
+            for l in range(len(list) - 1):
+                for p in range(len(ilist) - 1):
+                    if (list[l] == ilist[p][0]) and (ilist[p][2] == 'M'):
+                        child_list.append(ilist[p][1])
+    
+            for i in child_list:
+                child_surname = i[i.index('/'):]
+                if surname != child_surname:
+                    flag = 1
+                    print('ERROR: INDIVIDUAL: US16:   ' + i + ' has a different surname in the family')
+
+    if flag == 1:
+        return False
+    else:
+        return True
+
+def US32():
+    f = open("families.csv", "r")
+    fString = f.read()
+
+    flist = []
+    for line in fString.split("\n"):
+        flist.append(line.split(","))
+
+    del flist[0]
+
+    flag = 0
+    for i in range(len(flist) - 1):
+        list = re.findall(r'\S+', flist[i][7])
+        if len(list) > 1:
+            flag = 1
+            print('ERROR: FAMILY: US32:  The Family ' + flist[i][0] + ' have multiple births  ' + flist[i][7])
+
+    if flag == 1:
+        return False
+    else:
+        return True
